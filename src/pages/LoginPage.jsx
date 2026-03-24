@@ -1,20 +1,22 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import LoginContainer from '../components/login/LoginContainer'
 import { getAuth , GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import app from '../../firebaseConfig/config'
+import UserInfo  from '../context/userInfo';
 
 function LoginPage() {
   const provider = new GoogleAuthProvider();
   const auth = getAuth()
+  const uc = useContext(UserInfo);
+
 
   function handleLogin(){
     signInWithPopup(auth , provider).then((result)=>{
       console.log(result);
       
+      
     })
   }
-
-
 
   return (
     <div className='w-full h-full p-[2%]'>

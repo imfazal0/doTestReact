@@ -1,14 +1,12 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import LoginPage from './pages/LoginPage'
-import { onAuthStateChanged } from 'firebase/auth'
+import HomePage from './pages/HomePage'
 
 function App() {
-    
-
-
   return (
     <Routes>
+      <Route path='/' Component={HomePage}/>
       <Route path='/login' Component={LoginPage}/>
     </Routes>
   )
