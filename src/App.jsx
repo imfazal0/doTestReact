@@ -1,10 +1,12 @@
 import React from 'react'
+import { Route, Routes } from 'react-router-dom'
+import LoginPage from './pages/LoginPage'
 
 function App() {
   return (
-    <div className='w-full h-full '>
-      <p>fazal</p>
-    </div>
+    <Routes>
+      <Route path='/login' Component={LoginPage}/>
+    </Routes>
   )
 }
 
