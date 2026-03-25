@@ -7,6 +7,7 @@ function UserInfoContext({children}){
         name:'',
         email:'',
         profilePicture:'',
+        totalTestData:[] ,
     })
     
     return(
