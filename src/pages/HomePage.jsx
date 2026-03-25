@@ -39,7 +39,7 @@ const HomePage = () => {
 
     return !user ? <LoginPage/> : (
       <div className='w-full h-full px-[5%] py-[2%] '>
-        <button onClick={handleSignOut}>sign out</button>
+        
         <Dashboard user={uc.user} handleSignOut={handleSignOut}/>
       </div>
     )
