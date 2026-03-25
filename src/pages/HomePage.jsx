@@ -3,6 +3,8 @@ import LoginPage from './LoginPage';
 import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth'
 import Dashboard from '../components/home/Dashboard';
 import UserInfo from '../context/userInfo';
+import NavigateButtons from '../components/home/NavigateButtons';
+import PrevTestGrid from '../components/home/PrevTestGrid';
 
 const HomePage = () => {
   const [user , setUser]   = useState(null);
@@ -34,14 +36,17 @@ const HomePage = () => {
 
     function handleSignOut(){
         signOut(auth).then(()=>{
+          localStorage.removeItem('scores')
           return <LoginPage/>
         })
+
     }
 
     return !user ? <LoginPage/> : (
-      <div className='w-full h-full px-[5%] py-[2%] '>
-        
-        <Dashboard user={uc.user} handleSignOut={handleSignOut}/>
+      <div className='relative w-screen h-screen px-[5%] py-[2%] gap-2 shrink-0'>
+        <Dashboard user={uc.user} setUser={uc.setUser} handleSignOut={handleSignOut}/>
+        <NavigateButtons/>
+        <PrevTestGrid/>
       </div>
     )
 }

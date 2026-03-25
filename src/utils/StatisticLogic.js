@@ -16,6 +16,7 @@ export async function loadStatistics(userId) {
         );
         
         const querySnapshot = await getDocs(q);
+       
         
         let totalTestsCount = 0;
         let totalScoreSum = 0;
@@ -23,8 +24,12 @@ export async function loadStatistics(userId) {
         let today = new Date();
         let streakCount = 0;
         let lastTestDate = null;
-        
+        let totalTestData = [];
+
+
         querySnapshot.forEach((doc) => {
+            totalTestData.push(doc.data())
+            
             const testData = doc.data();
             totalTestsCount++;
             
@@ -58,7 +63,8 @@ export async function loadStatistics(userId) {
             totalTests:totalTestsCount,
             avgScore: totalTestsCount > 0 ? `${(totalScoreSum / totalTestsCount).toFixed(1)}%` : '0%',
             totalTime:formatTotalTime(totalTimeSpent),
-            streak:streakCount
+            streak:streakCount,
+            totalTestData:totalTestData
         });
         
         
