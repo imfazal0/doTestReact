@@ -14,12 +14,13 @@ const HomePage = () => {
       const unSubscribe = onAuthStateChanged(auth , (currentUser)=>{
           if (currentUser) {
                 setUser(currentUser);
-                console.log(currentUser);
+                // console.log(currentUser);
                 
                 uc.setUser(prev=>({
                     name:currentUser.displayName,
                     email:currentUser.email,
                     profilePicture:currentUser.photoURL,
+                    uid:currentUser.uid,
                 }))
           }else{
             setUser(null)
