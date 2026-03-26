@@ -13,6 +13,6 @@ createRoot(document.getElementById('root')).render(
     <UserInfoContext>
       <App />
     </UserInfoContext>
-  </StrictMode>,
+  </StrictMode>
   </BrowserRouter>
 )
