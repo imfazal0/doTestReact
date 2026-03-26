@@ -2,11 +2,12 @@ import React, { useContext, useEffect, useRef, useState } from 'react'
 import UserInfo from '../../context/userInfo'
 import { collection, getDocs, getFirestore,  orderBy,  query } from 'firebase/firestore';
 import app, { db } from '../../../firebaseConfig/config';
-import { RiArrowLeftFill, RiArrowLeftLine, RiDashboard3Line, RiFileFill, RiFolderOpenLine } from '@remixicon/react';
+import { RiArrowLeftFill, RiArrowLeftLine, RiDashboard3Line, RiFileFill, RiFolderOpenLine, RiGraduationCapFill } from '@remixicon/react';
 import { useNavigate } from 'react-router-dom';
 import { log } from 'firebase/firestore/pipelines';
+import { formatText } from '../../utils/FormatText';
 
-const LeftNav = () => {
+const LeftNav = ({setStartExam , setTestData}) => {
   const uc = useContext(UserInfo);
   const [subject, setSubject] = useState([]);
   const [showSubject , setShowSubject] = useState(true)
@@ -18,10 +19,8 @@ const LeftNav = () => {
     async function getSubject(db) {
       const subjectRef = collection(db, 'All_Subjects');
       const subjectSnapshot = await getDocs(subjectRef);
-      console.log(subjectSnapshot.docs);
       setSubject(subjectSnapshot.docs);
       subjectSnapshot.forEach((doc)=>{
-        console.log(doc.data());
         
       })
     }
@@ -44,17 +43,26 @@ const LeftNav = () => {
     }
     
     getTest();
-    console.log(test);
     
   }
 
 
   
   const navigate = useNavigate(null);
-  
+  const handleStartExam = (e)=>{
+      setStartExam(true)
+      const selectedTest = test.filter((test)=>{
+        
+        
+        return test.data().testName === e.target.id 
+
+      });
+      setTestData(selectedTest);
+      
+  }
 
   return (
-    <div className='w-100 h-full overflow-hidden bg-gray-100 rounded-2xl border border-gray-200 px-[2%] flex flex-col gap-2'>
+    <div className='w-100 shrink-0 h-full overflow-hidden  bg-gray-100 rounded-2xl border border-gray-200 px-5 flex flex-col gap-2'>
       {/* Header */}
 
       <div className='w-full h-[20%] border-b border-gray-300'>
@@ -82,15 +90,15 @@ const LeftNav = () => {
       {/* Seelct Subject */}
       {showSubject && 
       <div className='overflow-scroll w-full h-[80%] shrink-0 ' >
-         <div className='w-1/2 h-[10%] border border-purple-700  bg-gray-100 flex items-center rounded-2xl justify-center font-bold text-purple-700  ' >
-            Select Subject
+         <div className='w-1/2 gap-2 h-[10%] border border-purple-700  bg-gray-100 flex items-center rounded-2xl justify-center font-bold text-purple-700  ' >
+            <RiGraduationCapFill /> Select Subject
         </div>
         {
           subject.map((sub) => (
             <div  className='relative hover:bg-gray-200  hover:border-l-5 border-purple-700  w-full h-[10%] bg-gray-300 mt-[3%]  rounded-2xl flex p-[2%] items-center gap-x-2 border ' key={crypto.randomUUID()} >
               <div className='absolute z-100 w-full h-full top-0 left-0 rounded-2xl ' onClick={selSub} id={sub.data().subject}  ></div>
               <img src={sub.data().icon} alt="" className='h-full aspect-square'/>
-              <p className='flex font-bold text-sm'>{sub.data().subject}</p>
+              <p className='flex font-bold text-sm'>{formatText(sub.data().subject)}</p>
             </div>
           ))
         }
@@ -110,8 +118,9 @@ const LeftNav = () => {
           {test.length>0 && test.map((test)=>{
           return(
             <div  className='relative hover:bg-gray-200 w-[90%] h-[10%] bg-gray-300 mt-[3%]  rounded-2xl flex p-[2%] items-center gap-x-2 border hover:border-l-4 hover:border-purple-700' key={crypto.randomUUID()} >
+              <div className='absolute z-100 w-full h-full top-0 left-0 rounded-2xl ' id={test.data().testName} onClick={handleStartExam}  ></div>
               <RiFileFill />
-              <p>{test.data().testName}</p>
+              <p>{formatText(test.data().testName)}</p>
           </div>
           )
         })}

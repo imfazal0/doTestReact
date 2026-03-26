@@ -1,8 +1,11 @@
 import React from 'react'
+import Header from './Header'
 
-const TestContainer = () => {
+const TestContainer = ({testData}) => {
   return (
-    <div>TestContainer</div>
+    <div className='w-[70%] h-full  bg-gray-200 border border-gray-300 p-[2%] rounded-2xl'>
+      <Header testData={testData}/>
+    </div>
   )
 }
 

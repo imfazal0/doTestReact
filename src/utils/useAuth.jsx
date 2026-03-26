@@ -11,7 +11,6 @@ const useAuth = () => {
     const unSubscribe = onAuthStateChanged(auth , (currentUser)=>{
       if (currentUser) {
         setUser(currentUser);
-        console.log(currentUser);
         
         uc.setUser(prev=>({
                     name:currentUser.displayName,
