@@ -2,13 +2,17 @@ import React, { useContext, useEffect, useRef, useState } from 'react'
 import UserInfo from '../../context/userInfo'
 import { collection, getDocs, getFirestore,  orderBy,  query } from 'firebase/firestore';
 import app, { db } from '../../../firebaseConfig/config';
-import { RiArrowLeftFill, RiArrowLeftLine, RiFileFill } from '@remixicon/react';
+import { RiArrowLeftFill, RiArrowLeftLine, RiDashboard3Line, RiFileFill, RiFolderOpenLine } from '@remixicon/react';
+import { useNavigate } from 'react-router-dom';
+import { log } from 'firebase/firestore/pipelines';
 
 const LeftNav = () => {
   const uc = useContext(UserInfo);
   const [subject, setSubject] = useState([]);
   const [showSubject , setShowSubject] = useState(true)
   const [test , setTest]  = useState([]);
+  const [loading , setLoading] = useState(true);
+
   useEffect(() => {
 
     async function getSubject(db) {
@@ -28,7 +32,6 @@ const LeftNav = () => {
 
   const selSub = (e)=>{
     setShowSubject(false)
-    console.log(e.target.id);
 
     const getTest = async ()=>{
       const q = query(
@@ -39,24 +42,40 @@ const LeftNav = () => {
       setTest(snapshot.docs)
       
     }
+    
     getTest();
+    console.log(test);
+    
   }
 
 
+  
+  const navigate = useNavigate(null);
+  
+
   return (
-    <div className='w-100 h-full bg-gray-100 rounded-2xl border border-gray-200 px-[2%] flex flex-col gap-2'>
+    <div className='w-100 h-full overflow-hidden bg-gray-100 rounded-2xl border border-gray-200 px-[2%] flex flex-col gap-2'>
       {/* Header */}
 
-      <div className='w-full h-[10%] border-b border-gray-300'>
-        <div className='flex w-full h-full '>
-          <div className='flex items-center justify-center'>
-            <img src={uc.user.profilePicture} alt="" className='w-[50%] aspect-square rounded-full' />
+      <div className='w-full h-[20%] border-b border-gray-300'>
+        <div className='flex w-full h-1/2 gap-2'>
+          <div className='flex w-[20%] p-[2%]'>
+            <img src={uc.user.profilePicture} alt="" className='h-full  aspect-square rounded-full' />
           </div>
           <div className='font-bold text-gray-600 flex flex-col justify-center'>
             <p>{uc.user.name}</p>
             <p className='text-sm'>{uc.user.email}</p>
           </div>
-
+        </div>
+        <div className='h-1/2 w-full p-[3%]'>
+            <div className='h-full w-1/2 text-xl font-bold flex justify-center items-center text-white  bg-purple-700 rounded-2xl hover:border-2 hover:border-purple-700 hover:bg-white hover:text-purple-700  ' onClick={()=>{navigate('/')}}>
+                <div className='w-1/4 flex items-center justify-center'>
+                <RiDashboard3Line/> 
+                </div>
+                <div className='flex-1 items-center justify-center'>
+                  DashBoard
+                </div>
+            </div>
         </div>
       </div>
 
@@ -88,7 +107,7 @@ const LeftNav = () => {
 
 
 
-          {test && test.map((test)=>{
+          {test.length>0 && test.map((test)=>{
           return(
             <div  className='relative hover:bg-gray-200 w-[90%] h-[10%] bg-gray-300 mt-[3%]  rounded-2xl flex p-[2%] items-center gap-x-2 border hover:border-l-4 hover:border-purple-700' key={crypto.randomUUID()} >
               <RiFileFill />
@@ -96,13 +115,17 @@ const LeftNav = () => {
           </div>
           )
         })}
-        {
-          !test && 
-          <div>
-            No test Found
+      {
+          test.length<=0 && 
+          <div className='w-full h-full flex  flex-col items-center justify-center text-3xl font-bold text-gray-300'>
+            <div className='w-full flex justify-center'>
+              <RiFolderOpenLine size={200}/>
+            </div>
+            <div className='w-full flex justify-center'>
+              No Test Available
+            </div>
           </div>
         }
-
 
       </div>
       </div>
