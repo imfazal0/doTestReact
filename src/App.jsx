@@ -5,8 +5,10 @@ import HomePage from './pages/HomePage'
 import TestPage from './pages/TestPage'
 import AnalyticsPage from './pages/AnalyticsPage'
 import HistoryPage from './pages/HistoryPage'
+import useAuth from './utils/useAuth'
 
 function App() {
+
   return (
     <Routes>
       <Route path='/' Component={HomePage}/>

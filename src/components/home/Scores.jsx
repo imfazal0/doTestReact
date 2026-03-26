@@ -2,11 +2,8 @@ import React, { useEffect, useState } from 'react'
 import app from '../../../firebaseConfig/config';
 import { loadStatistics } from '../../utils/StatisticLogic';
 const Scores = ({user,setUser}) => {
-
-    const savedStats = JSON.parse(localStorage.getItem('scores'));
-    console.log(savedStats);
-    
-    const [stats , setStats] = useState(savedStats||{
+   
+    const [stats , setStats] = useState({
         totalTests: '',
         avgScore: '',
         totalTime:'',
@@ -16,7 +13,6 @@ const Scores = ({user,setUser}) => {
     useEffect(()=>{
         loadStatistics(user.uid).then((result)=>{
             setStats(result)
-            localStorage.setItem('scores',JSON.stringify(result))
             setUser(prev=>({...prev , totalTestData:result.totalTestData}))
         })
     },[])

@@ -13,12 +13,12 @@ const PrevTestGrid = () => {
 
 
   return (
-    <div className='w-full h-full p-[1%]'>
+    <div className='md:w-full md:h-full p-[1%] '>
         <div className='flex justify-between items-center'>
             <div className='flex h-[10%] gap-2 font-bold text-xl items-center justify-center'><RiHistoryLine />Recent Test</div>
             <div className='flex h-[10%] gap-2  text-l bg-gray-100 items-center justify-center border border-gray-300 px-2 rounded-sm'>View-All <RiArrowDropRightLine /></div>
         </div>
-        <div className='w-full h-full flex flex-wrap gap-2 justify-center'>
+        <div className='w-full h-full md:flex md:flex-row md:flex-wrap md:gap-2 justify-center'>
 
         {
             test &&

@@ -5,34 +5,14 @@ import Dashboard from '../components/home/Dashboard';
 import UserInfo from '../context/userInfo';
 import NavigateButtons from '../components/home/NavigateButtons';
 import PrevTestGrid from '../components/home/PrevTestGrid';
+import checkUser from '../utils/useAuth';
+import useAuth from '../utils/useAuth';
 
 const HomePage = () => {
-  const [user , setUser]   = useState(null);
   const auth = getAuth();
   const uc = useContext(UserInfo);
-  
-  useEffect(()=>{
+  const user = useAuth();
 
-      const unSubscribe = onAuthStateChanged(auth , (currentUser)=>{
-          if (currentUser) {
-                setUser(currentUser);
-                // console.log(currentUser);
-                
-                uc.setUser(prev=>({
-                    name:currentUser.displayName,
-                    email:currentUser.email,
-                    profilePicture:currentUser.photoURL,
-                    uid:currentUser.uid,
-                }))
-          }else{
-            setUser(null)
-          }
-
-          
-      })
-
-        return () => unSubscribe();
-    },[])
 
     function handleSignOut(){
         signOut(auth).then(()=>{
