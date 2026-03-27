@@ -2,16 +2,17 @@ import React, { useEffect, useState } from 'react'
 import LeftNav from '../components/test/LeftNav'
 import useAuth from '../utils/useAuth'
 import TestContainer from '../components/test/TestContainer'
+import TestDataContext from '../context/TestDataContext'
 
 const TestPage = () => {
 
   const [startExam , setStartExam] = useState(false)
   const [testData , setTestData] = useState([])
 
-  useEffect(()=>{
-    console.log(testData);
+  // useEffect(()=>{
+   
     
-  },[testData])
+  // },[testData])
 
 
   const user = useAuth()
@@ -23,12 +24,11 @@ const TestPage = () => {
     )
   :
    (
-    <div className='w-screen flex gap-5 h-screen p-5'>
-        <LeftNav setStartExam={setStartExam} setTestData={setTestData} />
-        {
-          startExam &&
+    <div className='w-screen flex md:flex-row flex-col gap-5 h-screen p-5'>
+      <TestDataContext>
+        <LeftNav setStartExam={setStartExam} setTestData={setTestData} />  
         <TestContainer startExam={startExam} testData={testData}  />
-        }
+      </TestDataContext>
     </div>
   )
 }
