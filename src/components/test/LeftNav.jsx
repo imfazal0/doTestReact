@@ -10,26 +10,32 @@ import NavHeader from './leftnavcomponents/NavHeader';
 import NavSubject from './leftnavcomponents/NavSubject';
 import NavTest from './leftnavcomponents/NavTest';
 import testData from '../../context/testData';
+import TestStarted from './leftnavcomponents/TestStarted';
 
 const LeftNav = ({setStartExam , setTestData}) => {
   const tc = useContext(testData);
   const [subject, setSubject] = useState([]);
   const [showSubject , setShowSubject] = useState(true)
-
+  const [error , setError] = useState(null);
 
 
   const selSub = (e)=>{
-    console.log(tc);
     
     setShowSubject(false)
-
+    
     const getTest = async ()=>{
-      const q = query(
+      try {
+        const q = query(
         collection(db,e.target.id),
         orderBy("uploadedAt")
       )
-    const snapshot = await getDocs(q);
-      tc.setTestData(snapshot.docs)
+        const snapshot = await getDocs(q);
+        tc.setTestData(snapshot.docs)
+        
+      } catch (error) {
+          setError(error);
+      }
+      
       
     }
     
@@ -39,10 +45,9 @@ const LeftNav = ({setStartExam , setTestData}) => {
 
 
   
-  const navigate = useNavigate(null);
-  
 
-  return (
+
+ return tc.startExam ? <TestStarted / > : (
     <div className='md:w-100 w-full shrink-0 h-full overflow-hidden  bg-gray-100 rounded-2xl border border-gray-200 px-5 flex flex-col gap-2'>
       {/* Header */}
       <NavHeader/>

@@ -8,11 +8,10 @@ const NavTest = ({setShowSubject}) => {
     const tc = useContext(testData);
 
       const selTest = (e)=>{
-      
       const selectedTest = tc.testData.filter((test)=>{
         return test.data().testName === e.target.id });
         tc.setTest(selectedTest);
-      
+        tc.setStartExam(true);
   }
 
 

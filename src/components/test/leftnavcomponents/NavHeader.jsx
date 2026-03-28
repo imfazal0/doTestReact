@@ -1,9 +1,12 @@
 import React, { useContext } from 'react'
 import UserInfo from '../../../context/userInfo'
 import { RiDashboard3Line } from '@remixicon/react';
+import { useNavigate } from 'react-router-dom';
 
 const NavHeader = () => {
     const uc = useContext(UserInfo);
+      const navigate = useNavigate(null);
+
   return (
      <div className='w-full h-[20%] border-b border-gray-300'>
         <div className='flex w-full h-1/2 gap-2'>

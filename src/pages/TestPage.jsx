@@ -6,14 +6,6 @@ import TestDataContext from '../context/TestDataContext'
 
 const TestPage = () => {
 
-  const [startExam , setStartExam] = useState(false)
-  const [testData , setTestData] = useState([])
-
-  // useEffect(()=>{
-   
-    
-  // },[testData])
-
 
   const user = useAuth()
   return !user ?  
@@ -26,8 +18,8 @@ const TestPage = () => {
    (
     <div className='w-screen flex md:flex-row flex-col gap-5 h-screen p-5'>
       <TestDataContext>
-        <LeftNav setStartExam={setStartExam} setTestData={setTestData} />  
-        <TestContainer startExam={startExam} testData={testData}  />
+        <LeftNav/>  
+        <TestContainer/>
       </TestDataContext>
     </div>
   )

@@ -1,22 +1,29 @@
 import { RiGraduationCapFill } from '@remixicon/react'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { db } from '../../../../firebaseConfig/config'
 import { collection, getDocs } from 'firebase/firestore'
 import { formatText } from '../../../utils/FormatText'
 const NavSubject = ({setSubject , subject , selSub}) => {
+  const [error , setError] = useState(null);
+
 
     useEffect(()=>{
          async function getSubject(db) {
-              const subjectRef = collection(db, 'All_Subjects');
-              const subjectSnapshot = await getDocs(subjectRef);
-              setSubject(subjectSnapshot.docs);
-              subjectSnapshot.forEach((doc)=>{
-                
-              })
+          try{
+            const subjectRef = collection(db, 'All_Subjects');
+            const subjectSnapshot = await getDocs(subjectRef);
+            setSubject(subjectSnapshot.docs);
+            subjectSnapshot.forEach((doc)=>{
+            })
+          } catch (err){
+              setError(err);
+          }
             }
         
             return () => getSubject(db);
     },[])
+
+    
   return (
     <div className='overflow-scroll w-full h-[80%] shrink-0 ' >
          <div className='w-1/2 gap-2 h-[10%] text-sm border border-purple-700  bg-gray-100 flex items-center rounded-2xl justify-center font-bold text-purple-700  ' >
@@ -32,7 +39,8 @@ const NavSubject = ({setSubject , subject , selSub}) => {
             </div>
           ))
         }
-      </div>
+    </div>
+    
   )
 }
 

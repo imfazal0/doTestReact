@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Header from './Header'
 import Question from './Question'
 import TestDataContext from '../../context/TestDataContext'
@@ -8,8 +8,7 @@ import ButtonsNav from './testcontainercomponents/ButtonsNav'
 
 const TestContainer = () => {
   const tc = useContext(testData);
-
-
+  
 
   return (
 
