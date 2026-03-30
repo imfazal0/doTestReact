@@ -22,12 +22,11 @@ const LeftNav = ({setStartExam , setTestData}) => {
   const selSub = (e)=>{
     
     setShowSubject(false)
-    
+    tc.setTestResult(prev=>({...prev , subject:e.target.id}));
     const getTest = async ()=>{
       try {
         const q = query(
         collection(db,e.target.id),
-        orderBy("uploadedAt")
       )
         const snapshot = await getDocs(q);
         tc.setTestData(snapshot.docs)
