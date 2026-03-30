@@ -71,7 +71,7 @@ const TestContainer = () => {
         tc.startExam &&
         <>
           <Header  />
-          <Question  question={currentQuestion?.question} />
+          <Question  question={currentQuestion?.question} qIdx={qIdx+1} />
           {
             currentOptions.length && 
             <OptionsGrid options={currentOptions} checkedOpt={checkedOpt} setCheckedOpt={setCheckedOpt}/>
