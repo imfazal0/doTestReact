@@ -7,8 +7,11 @@ import OptionsGrid from './OptionsGrid'
 import ButtonsNav from './testcontainercomponents/ButtonsNav'
 import SubmitTest from './testcontainercomponents/SubmitTest'
 import { toLower } from 'firebase/firestore/pipelines'
-import getFormattedTime from '../../utils/getFormattedTime'
+
 import UserInfo from '../../context/userInfo'
+import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
+import { db } from '../../../firebaseConfig/config'
+import { useNavigate } from 'react-router-dom'
 
 const TestContainer = () => {
   const tc = useContext(testData);
@@ -20,34 +23,57 @@ const TestContainer = () => {
   const [qIdx, setQIdx] = useState(0);
   const [checkedOpt, setCheckedOpt] = useState(null);
   const [lst, setLst] = useState(false);
-  const [timeSpent , setTimeSpent] = useState('');
+  const [timeSpent, setTimeSpent] = useState('');
+  const navigate = useNavigate()
 
 
-  const submitTest = ()=>{
-    const timeStamp = getFormattedTime();
+  const submitTest = async () => {
+    const timeStamp = serverTimestamp();
     let totalMarks = 0;
     const allAns = Object.values(testJson);
     const maxMarks = allAns.length;
     let percentage = 0;
     console.log(testJson);
-    allAns.forEach((element ,idx) => {
-      if (element.correctAnswer.toLowerCase() === tc.testResult.userAnswers[idx].toLowerCase() ) {
-        totalMarks+=1;
+    allAns.forEach((element, idx) => {
+      if (element.correctAnswer.toLowerCase() === tc.testResult.userAnswers[idx].toLowerCase()) {
+        totalMarks += 1;
       }
     });
-    percentage = (totalMarks/maxMarks)*100 
+    percentage = (totalMarks / maxMarks) * 100
 
-    tc.setTestResult(prev=>({...prev ,
+    tc.setTestResult(prev => ({
+      ...prev,
+      correctAnswers:totalMarks,
       score: percentage,
-      timestamp: timeStamp,
-      timeSpent:timeSpent,
+      timestamp: serverTimestamp(),
+      timeSpent: timeSpent,
       totalQuestions: maxMarks,
-      name:uc.user.name,
-      email:uc.user.email,
-      userId:uc.user.uid
+      name: uc.user.name,
+      email: uc.user.email,
+      userId: uc.user.uid
     }))
 
-    console.log(uc.user);
+    if (!uc.user) {
+      navigate('/')
+    } else {
+      const docRef = await addDoc(collection(db, 'testResults'),
+        {
+          ...tc.testResult,
+          correctAnswers:totalMarks,
+          score: percentage,
+          timestamp: serverTimestamp(),
+          timeSpent: timeSpent,
+          totalQuestions: maxMarks,
+          name: uc.user.name,
+          email: uc.user.email,
+          userId: uc.user.uid
+        }
+
+      )
+      console.log("Test result saved with ID: ", docRef.id);
+    }
+
+
 
   }
 
@@ -113,7 +139,7 @@ const TestContainer = () => {
         <>
           <Header timeSpent={timeSpent} setTimeSpent={setTimeSpent} lst={lst} />
           {
-              !lst && 
+            !lst &&
             <>
               <Question question={currentQuestion?.question} qIdx={qIdx + 1} />
               {
@@ -124,7 +150,7 @@ const TestContainer = () => {
           }
           {
             lst &&
-            <SubmitTest/>
+            <SubmitTest />
           }
 
 

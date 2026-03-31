@@ -1,5 +1,5 @@
 
-import { collection, getDocs, getFirestore, query, where  } from 'firebase/firestore';
+import { collection, getDocs, getFirestore, limit, orderBy, query, where  } from 'firebase/firestore';
 import app from '../../firebaseConfig/config';
 import { formatTotalTime } from './formatTotalTime';
 
@@ -12,7 +12,9 @@ export async function loadStatistics(userId) {
         const testResultsRef = collection(db, 'testResults');
         const q = query(
             testResultsRef,
-            where('userId', '==', userId)
+            where('userId', '==', userId),
+            orderBy('timestamp', 'desc'),
+             limit(6)
         );
         
         const querySnapshot = await getDocs(q);
