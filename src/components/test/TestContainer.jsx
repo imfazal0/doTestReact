@@ -5,61 +5,102 @@ import TestDataContext from '../../context/TestDataContext'
 import testData from '../../context/testData'
 import OptionsGrid from './OptionsGrid'
 import ButtonsNav from './testcontainercomponents/ButtonsNav'
+import SubmitTest from './testcontainercomponents/SubmitTest'
+import { toLower } from 'firebase/firestore/pipelines'
+import getFormattedTime from '../../utils/getFormattedTime'
+import UserInfo from '../../context/userInfo'
 
 const TestContainer = () => {
   const tc = useContext(testData);
-  const [testJson , setTestJson] = useState({});
-  const [currentQuestion , setCurrentQuestion] = useState({});
-  const [currentOptions , setCurrentOptions] = useState([]);
+  const uc = useContext(UserInfo);
+  const [testJson, setTestJson] = useState({});
+  const [currentQuestion, setCurrentQuestion] = useState({});
+  const [currentOptions, setCurrentOptions] = useState([]);
   const [allKeys, setAllKeys] = useState([]);
   const [qIdx, setQIdx] = useState(0);
-  const [checkedOpt , setCheckedOpt] = useState(null);
+  const [checkedOpt, setCheckedOpt] = useState(null);
+  const [lst, setLst] = useState(false);
+  const [timeSpent , setTimeSpent] = useState('');
 
-  useEffect(()=>{
+
+  const submitTest = ()=>{
+    const timeStamp = getFormattedTime();
+    let totalMarks = 0;
+    const allAns = Object.values(testJson);
+    const maxMarks = allAns.length;
+    let percentage = 0;
+    console.log(testJson);
+    allAns.forEach((element ,idx) => {
+      if (element.correctAnswer.toLowerCase() === tc.testResult.userAnswers[idx].toLowerCase() ) {
+        totalMarks+=1;
+      }
+    });
+    percentage = (totalMarks/maxMarks)*100 
+
+    tc.setTestResult(prev=>({...prev ,
+      score: percentage,
+      timestamp: timeStamp,
+      timeSpent:timeSpent,
+      totalQuestions: maxMarks,
+      name:uc.user.name,
+      email:uc.user.email,
+      userId:uc.user.uid
+    }))
+
+    console.log(uc.user);
+
+  }
+
+
+
+
+
+
+  useEffect(() => {
     if (tc.startExam) {
-        const Test = JSON.parse(tc.test[0].data().exam)
-        const keys = Object.keys(Test)
-        setTestJson(Test);
-        setAllKeys(keys);
+      const Test = JSON.parse(tc.test[0].data().exam)
+      const keys = Object.keys(Test)
+      setTestJson(Test);
+      setAllKeys(keys);
     }
 
-  },[tc.startExam])
+  }, [tc.startExam])
 
-  useEffect(()=>{
+  useEffect(() => {
     chageCurrentQuestion()
-   
-  },[qIdx , testJson])
+
+  }, [qIdx, testJson])
 
 
 
 
 
 
-  const chageCurrentQuestion = ()=>{
-     if (tc.startExam) {
-        setCurrentQuestion(
-          testJson[allKeys[qIdx]]          
+  const chageCurrentQuestion = () => {
+    if (tc.startExam) {
+      setCurrentQuestion(
+        testJson[allKeys[qIdx]]
+      )
+      setCurrentOptions(
+        Object.values(
+          testJson[allKeys[qIdx]].options
         )
-        setCurrentOptions(
-          Object.values(
-            testJson[allKeys[qIdx]].options
-          )
-          
-        )
+
+      )
     }
   }
 
 
 
-  useEffect(()=>{
-    
-  },[testJson])
- 
-  useEffect(()=>{
-   
-    
-    
-  },[currentQuestion])
+  useEffect(() => {
+
+  }, [testJson])
+
+  useEffect(() => {
+
+
+
+  }, [currentQuestion])
 
 
 
@@ -70,13 +111,24 @@ const TestContainer = () => {
       {
         tc.startExam &&
         <>
-          <Header  />
-          <Question  question={currentQuestion?.question} qIdx={qIdx+1} />
+          <Header timeSpent={timeSpent} setTimeSpent={setTimeSpent} lst={lst} />
           {
-            currentOptions.length && 
-            <OptionsGrid options={currentOptions} checkedOpt={checkedOpt} setCheckedOpt={setCheckedOpt}/>
+              !lst && 
+            <>
+              <Question question={currentQuestion?.question} qIdx={qIdx + 1} />
+              {
+                currentOptions.length &&
+                <OptionsGrid options={currentOptions} checkedOpt={checkedOpt} setCheckedOpt={setCheckedOpt} />
+              }
+            </>
           }
-          <ButtonsNav setQIdx={setQIdx} checkedOpt={checkedOpt} setCheckedOpt={setCheckedOpt} allKeys={allKeys.length-1}/>
+          {
+            lst &&
+            <SubmitTest/>
+          }
+
+
+          <ButtonsNav submitTest={submitTest} qIdx={qIdx} setQIdx={setQIdx} checkedOpt={checkedOpt} setCheckedOpt={setCheckedOpt} allKeys={allKeys.length - 1} setLst={setLst} lst={lst} />
         </>
 
       }

@@ -1,71 +1,82 @@
 import { RiArrowLeftLine, RiArrowRightLine } from '@remixicon/react'
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import testData from '../../../context/testData'
 
-const ButtonsNav = ({setQIdx,setCheckedOpt,checkedOpt,allKeys}) => {
-  const opt = ["a",'b','c','d']
+const ButtonsNav = ({ qIdx , setQIdx, setCheckedOpt, checkedOpt, allKeys ,lst ,setLst , submitTest}) => {
+  const opt = ["a", 'b', 'c', 'd']
   const tc = useContext(testData);
+ 
+  const tst = tc.testResult.userAnswers;
 
   const bt = {
-    handleNext : ()=>{
-    if (checkedOpt) {
-      setQIdx(
-      prev =>
-      { 
-         return prev<allKeys ? prev+1 : prev
-      }
-    )      
-    tc.setTestResult(prev=>({...prev , 
-        userAnswers:[...prev.userAnswers ,(opt[Number(checkedOpt)])]
-      }));
-    setCheckedOpt(null)
-    }
-
-    
-  },
-    handlePrev : ()=>{
-      const tst = tc.testResult.userAnswers;
-
-    setQIdx(
-      prev =>
-      { 
-         return prev>0 ? prev-1 : prev
+    handleNext: () => {
+      if (checkedOpt && !lst ) {
+        setQIdx(
+          (prev) => {
+            return prev < allKeys ? prev + 1 : prev
+          }
+        )
+        tc.setTestResult(prev => ({
+          ...prev,
+          userAnswers: [...prev.userAnswers, (opt[Number(checkedOpt)])]
+        }));
+        
+        setCheckedOpt(null)
+      }else{
+        submitTest()
       }
       
-    )
+      if(allKeys === tst.length){
+        setLst(true)
+      }
+    },
+    handlePrev: () => {
+      setLst(false)
+      setQIdx(
+        prev => {
+          return prev > 0 ? prev - 1 : prev
+        }
 
-    if(tst.length<=0){
-      setCheckedOpt(null)      
-    }else{
-      setCheckedOpt(opt.indexOf(tst[tst.length-1]));
-    }
+      )
+        tc.setTestResult(
+        prev => ({
+          ...prev,
+          userAnswers: tst.slice(0,tst.length === 2 ?tst.length-1: tst.length - 2)
+        })
+      );
+
+
+
+
+      if (tst.length <= 0) {
+        setCheckedOpt(null)
+      } else {
+        setCheckedOpt(opt.indexOf(tst[tst.length - 1]));
+      }
+
     
-    tc.setTestResult(
-        prev=>({...prev , 
-        userAnswers:tst.slice(0 , tst.length-1)
-      })
-    );
+    },
+    submitTest: () => {
 
-  },
-  submitTest:()=>{
+    },
 
-  },
 
   }
+  
   return (
     <div className='w-full flex-1 p-[2%] justify-center flex gap-2 '>
-        <div className='w-[40%] h-4/5 bg-linear-to-tl from-purple-700 to bg-purple-500 rounded-2xl text-white font-extrabold flex  px-[2%] items-center text-2xl'
-          onClick={bt.handlePrev}
-          >
-            <RiArrowLeftLine size={35}/>
-            <p>Previous</p>
-        </div>
-        <div className='w-[40%] h-4/5 bg-linear-to-tr from-green-500 to bg-green-400 rounded-2xl  text-white font-extrabold flex  px-[2%] justify-end items-center text-2xl' 
-          onClick={bt.handleNext}
-          >
-            <p>Next Question</p>
-            <RiArrowRightLine size={35}/>
-        </div>
+      <div className='w-[40%] h-4/5 bg-linear-to-tl from-purple-700 to bg-purple-500 rounded-2xl text-white font-extrabold flex  px-[2%] items-center text-2xl'
+        onClick={bt.handlePrev}
+      >
+        <RiArrowLeftLine size={35} />
+        <p>Previous</p>
+      </div>
+      <div className='w-[40%] h-4/5 bg-linear-to-tr from-green-500 to bg-green-400 rounded-2xl  text-white font-extrabold flex  px-[2%] justify-end items-center text-2xl'
+        onClick={bt.handleNext}
+      >
+        <p>{!lst ? "Next Question" : "Submit Test" }</p>
+        <RiArrowRightLine size={35} />
+      </div>
     </div>
   )
 }
