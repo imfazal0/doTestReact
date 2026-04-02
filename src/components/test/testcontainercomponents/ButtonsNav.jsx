@@ -67,14 +67,14 @@ const ButtonsNav = ({submitDone, qIdx , setQIdx, setCheckedOpt, checkedOpt, allK
   }
   
   return (
-    <div className='w-full flex-1 p-[2%] justify-center flex gap-2 '>
-      <div className='w-[40%] h-4/5 bg-linear-to-tl from-purple-700 to bg-purple-500 rounded-2xl text-white font-extrabold flex  px-[2%] items-center text-2xl'
+    <div className='w-full md:h-1/3 md:p-[2%] py-[12%] justify-center flex gap-2 md:text-2xl md:flex-row flex-col-reverse text-xl'>
+      <div className='md:w-[40%] md:h-4/5  bg-linear-to-tl from-purple-700 to bg-purple-500 rounded-2xl text-white font-extrabold flex  px-[2%] items-center '
         onClick={bt.handlePrev}
       >
         <RiArrowLeftLine size={35} />
         <p>Previous</p>
       </div>
-      <div className='w-[40%] h-4/5 bg-linear-to-tr from-green-500 to bg-green-400 rounded-2xl  text-white font-extrabold flex  px-[2%] justify-end items-center text-2xl'
+      <div className='md:w-[40%] md:h-4/5 bg-linear-to-tr from-green-500 to bg-green-400 rounded-2xl  text-white font-extrabold flex  px-[2%] justify-end items-center '
         onClick={bt.handleNext}
       >
         <p>{!lst ? "Next Question" : "Submit Test" }</p>

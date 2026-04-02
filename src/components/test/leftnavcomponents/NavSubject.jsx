@@ -5,7 +5,8 @@ import { collection, getDocs } from 'firebase/firestore'
 import { formatText } from '../../../utils/FormatText'
 const NavSubject = ({setSubject , subject , selSub}) => {
   const [error , setError] = useState(null);
-
+  const [loading , setLoading] = useState(true);
+  
 
     useEffect(()=>{
          async function getSubject(db) {
@@ -13,10 +14,11 @@ const NavSubject = ({setSubject , subject , selSub}) => {
             const subjectRef = collection(db, 'All_Subjects');
             const subjectSnapshot = await getDocs(subjectRef);
             setSubject(subjectSnapshot.docs);
-            subjectSnapshot.forEach((doc)=>{
-            })
+            
           } catch (err){
               setError(err);
+          }finally{
+            setLoading(false)
           }
             }
         
@@ -30,6 +32,7 @@ const NavSubject = ({setSubject , subject , selSub}) => {
             <RiGraduationCapFill /> Select Subject
         </div>
         {
+          !loading && 
           subject.map((sub,idx) => (
             <div  className='relative hover:bg-gray-200  hover:border-l-5 border-purple-700  w-full h-[10%] bg-gray-300 mt-[3%]  rounded-2xl flex p-[2%] items-center gap-x-2 border ' key={idx} >
               <div className='absolute z-100 w-full h-full top-0 left-0 rounded-2xl ' 
@@ -38,6 +41,18 @@ const NavSubject = ({setSubject , subject , selSub}) => {
               <p className='flex font-bold text-sm'>{formatText(sub.data().subject)}</p>
             </div>
           ))
+        }
+        {
+          loading && 
+          <>
+            <div  className='relative w-full h-[10%] bg-gray-300 mt-[3%]  rounded-2xl flex p-[2%] items-center gap-x-2  animate-pulse '  ></div>
+            <div  className='relative w-full h-[10%] bg-gray-300 mt-[3%]  rounded-2xl flex p-[2%] items-center gap-x-2  animate-pulse '  ></div>
+            <div  className='relative w-full h-[10%] bg-gray-300 mt-[3%]  rounded-2xl flex p-[2%] items-center gap-x-2  animate-pulse '  ></div>
+            <div  className='relative w-full h-[10%] bg-gray-300 mt-[3%]  rounded-2xl flex p-[2%] items-center gap-x-2  animate-pulse '  ></div>
+            <div  className='relative w-full h-[10%] bg-gray-300 mt-[3%]  rounded-2xl flex p-[2%] items-center gap-x-2  animate-pulse '  ></div>
+            <div  className='relative w-full h-[10%] bg-gray-300 mt-[3%]  rounded-2xl flex p-[2%] items-center gap-x-2  animate-pulse '  ></div>
+
+          </>
         }
     </div>
     

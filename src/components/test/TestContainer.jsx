@@ -41,7 +41,7 @@ const TestContainer = () => {
 
     setSubmitDone(true);
 
-    
+
     tc.setTestResult(prev => ({
       ...prev,
       correctAnswers:totalMarks,
@@ -134,7 +134,7 @@ const TestContainer = () => {
 
   return (
 
-    <div className='w-[70%] h-full  bg-gray-200 border border-gray-300 p-[2%] rounded-2xl flex flex-col gap-5'>
+    <div className='md:w-[70%] w-full h-full  bg-gray-200 border border-gray-300 p-[2%] rounded-2xl flex flex-col gap-5'>
       {
         tc.startExam &&
         <>
@@ -158,6 +158,27 @@ const TestContainer = () => {
           <ButtonsNav submitDone={submitDone} submitTest={submitTest} qIdx={qIdx} setQIdx={setQIdx} checkedOpt={checkedOpt} setCheckedOpt={setCheckedOpt} allKeys={allKeys.length - 1} setLst={setLst} lst={lst} />
         </>
 
+      }
+      {
+        !tc.startExam &&
+       <>
+          <div className='w-full md:min-h-[15%] h-[10%] animate-pulse bg-gray-100 rounded-2xl grid grid-cols-4 items-center justify-center text-white md:text-xl text-sm'>
+              
+          </div>
+          <div className="w-full md:min-h-1/5 min-h-1/12  rounded-2xl animate-pulse bg-gray-100 px-[3%] flex items-center py-[1%]">
+          </div>
+          <div className='w-full md:min-h-1/3  justify-center flex flex-wrap gap-5 relative'>
+          <div className='relative w-[45%] h-1/2 animate-pulse bg-gray-100 rounded-2xl   flex items-center px-2 gap-5 ' ></div>
+          <div className='relative w-[45%] h-1/2 animate-pulse bg-gray-100 rounded-2xl   flex items-center px-2 gap-5 ' ></div>
+          <div className='relative w-[45%] h-1/2 animate-pulse bg-gray-100 rounded-2xl   flex items-center px-2 gap-5 ' ></div>
+          <div className='relative w-[45%] h-1/2 animate-pulse bg-gray-100 rounded-2xl   flex items-center px-2 gap-5 ' ></div>          
+          </div>
+          <div className='w-full md:h-1/3 md:p-[2%] py-[12%] justify-center flex gap-2 md:text-2xl md:flex-row flex-col-reverse text-xl'>
+          <div className='md:w-[40%] md:h-4/5   animate-pulse bg-gray-100 rounded-2xl text-white font-extrabold flex  px-[2%] items-center '></div>
+          <div className='md:w-[40%] md:h-4/5  animate-pulse bg-gray-100 rounded-2xl text-white font-extrabold flex  px-[2%] items-center '></div>
+          </div>
+          
+       </>
       }
     </div>
 

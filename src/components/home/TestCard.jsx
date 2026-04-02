@@ -13,7 +13,7 @@ const TestCard = ({test}) => {
                 }) : 'Recent';
    
   return (
-    <div className='md:w-[30%] w-full flex flex-col  bg-gray-200 rounded-2xl mt-5 py-[3%] md:py-[1%]  px-[2%]'>
+    <div className='md:w-[30%] md:h-1/2 h-[30vh] w-full flex flex-col  bg-gray-200 rounded-2xl mt-5 py-[3%] md:py-[1%]  px-[2%]'>
             <div className='flex justify-between h-[15%]'>
                 <div className='font-bold'>{test.subject}</div>
                 <div className='text-gray-500 flex items-center bg-gray-300 px-2 rounded-2xl text-sm'>{date}</div>
@@ -28,8 +28,8 @@ const TestCard = ({test}) => {
             <div className='flex items-center text-xs'><RiTimeLine size={20} color='gray'/>{test.timeSpent}m</div>
         </div>
         <div className='h-1/5 w-full flex flex-row items-center gap-x-2'>
-            <div className='w-1/2 h-9/12 border border-gray-300 bg-gray-100 font-bold text-purple-700 rounded-xl flex items-center justify-center hover:bg-gray-200 hover:shadow-2xl transition-all  '>Review</div>
-            <div className='w-1/2 h-9/12 border-0 border-gray-300 bg-purple-700 font-bold text-white rounded-xl flex items-center justify-center  hover:bg-purple-900 hover:shadow-2xl transition-all '>Retake</div>
+            <div className='w-1/2 h-9/12 border border-gray-300 bg-gray-100 font-bold text-purple-700 md:rounded-xl rounded-md flex items-center justify-center hover:bg-gray-200 hover:shadow-2xl transition-all  '>Review</div>
+            <div className='w-1/2 h-9/12 border-0 border-gray-300 bg-purple-700 font-bold text-white md:rounded-xl rounded-md flex items-center justify-center  hover:bg-purple-900 hover:shadow-2xl transition-all '>Retake</div>
             
         </div>
 

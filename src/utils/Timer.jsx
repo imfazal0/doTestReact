@@ -34,7 +34,7 @@ const Timer = ({setTimeSpent ,lst}) => {
 
 
   return (
-    <div>
+    <div className="font-bold">
         {formatTime(timeLeft)}
     </div>
   );
