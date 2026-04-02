@@ -3,6 +3,7 @@ import LeftNav from '../components/test/LeftNav'
 import useAuth from '../utils/useAuth'
 import TestContainer from '../components/test/TestContainer'
 import TestDataContext from '../context/TestDataContext'
+import LoginPage from './LoginPage'
 
 const TestPage = () => {
 
@@ -10,9 +11,7 @@ const TestPage = () => {
   const user = useAuth()
   return !user ?  
     (
-      <div> 
-
-      </div>
+    <LoginPage />
     )
   :
    (
