@@ -14,7 +14,6 @@ export async function loadStatistics(userId) {
             testResultsRef,
             where('userId', '==', userId),
             orderBy('timestamp', 'desc'),
-             limit(6)
         );
         
         const querySnapshot = await getDocs(q);

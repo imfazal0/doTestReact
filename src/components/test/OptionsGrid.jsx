@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react'
 import Option from './testcontainercomponents/Option' 
 
 const OptionsGrid = ({options , setCheckedOpt , checkedOpt}) => {
- 
+  const qidx = ["A","B","C","D"]
 
   return (
     <div className='w-full md:min-h-1/3  justify-center flex flex-wrap gap-5 relative'>
       { 
        options.map((opt,idx)=>{
-            return(<Option key={idx} opt={opt} checkedOpt={checkedOpt} setCheckedOpt={setCheckedOpt} idx={idx}/>)
+            return(<Option key={idx} opt={opt} checkedOpt={checkedOpt} setCheckedOpt={setCheckedOpt} idx={idx} qidx={qidx[idx]}/>)
         })
       
       }
