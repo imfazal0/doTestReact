@@ -1,13 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react'
 import Header from './Header'
 import Question from './Question'
-import TestDataContext from '../../context/TestDataContext'
 import testData from '../../context/testData'
 import OptionsGrid from './OptionsGrid'
 import ButtonsNav from './testcontainercomponents/ButtonsNav'
 import SubmitTest from './testcontainercomponents/SubmitTest'
-import { toLower } from 'firebase/firestore/pipelines'
-
 import UserInfo from '../../context/userInfo'
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
 import { db } from '../../../firebaseConfig/config'
@@ -24,6 +21,7 @@ const TestContainer = () => {
   const [checkedOpt, setCheckedOpt] = useState(null);
   const [lst, setLst] = useState(false);
   const [timeSpent, setTimeSpent] = useState('');
+  const [submitDone, setSubmitDone] = useState(false);
   const navigate = useNavigate()
 
 
@@ -41,6 +39,9 @@ const TestContainer = () => {
     });
     percentage = (totalMarks / maxMarks) * 100
 
+    setSubmitDone(true);
+
+    
     tc.setTestResult(prev => ({
       ...prev,
       correctAnswers:totalMarks,
@@ -154,7 +155,7 @@ const TestContainer = () => {
           }
 
 
-          <ButtonsNav submitTest={submitTest} qIdx={qIdx} setQIdx={setQIdx} checkedOpt={checkedOpt} setCheckedOpt={setCheckedOpt} allKeys={allKeys.length - 1} setLst={setLst} lst={lst} />
+          <ButtonsNav submitDone={submitDone} submitTest={submitTest} qIdx={qIdx} setQIdx={setQIdx} checkedOpt={checkedOpt} setCheckedOpt={setCheckedOpt} allKeys={allKeys.length - 1} setLst={setLst} lst={lst} />
         </>
 
       }

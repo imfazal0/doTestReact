@@ -2,7 +2,7 @@ import { RiArrowLeftLine, RiArrowRightLine } from '@remixicon/react'
 import React, { useContext, useEffect, useState } from 'react'
 import testData from '../../../context/testData'
 
-const ButtonsNav = ({ qIdx , setQIdx, setCheckedOpt, checkedOpt, allKeys ,lst ,setLst , submitTest}) => {
+const ButtonsNav = ({submitDone, qIdx , setQIdx, setCheckedOpt, checkedOpt, allKeys ,lst ,setLst , submitTest}) => {
   const opt = ["a", 'b', 'c', 'd']
   const tc = useContext(testData);
  
@@ -31,6 +31,9 @@ const ButtonsNav = ({ qIdx , setQIdx, setCheckedOpt, checkedOpt, allKeys ,lst ,s
       }
     },
     handlePrev: () => {
+      if (!submitDone) {
+        
+      
       setLst(false)
       setQIdx(
         prev => {
@@ -55,7 +58,7 @@ const ButtonsNav = ({ qIdx , setQIdx, setCheckedOpt, checkedOpt, allKeys ,lst ,s
       }
 
     
-    },
+    }},
     submitTest: () => {
 
     },

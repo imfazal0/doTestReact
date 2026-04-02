@@ -20,9 +20,11 @@ const LeftNav = ({setStartExam , setTestData}) => {
 
 
   const selSub = (e)=>{
-    
     setShowSubject(false)
+   
     tc.setTestResult(prev=>({...prev , subject:e.target.id}));
+    
+    
     const getTest = async ()=>{
       try {
         const q = query(
@@ -30,9 +32,15 @@ const LeftNav = ({setStartExam , setTestData}) => {
       )
         const snapshot = await getDocs(q);
         tc.setTestData(snapshot.docs)
+        console.log("hello");
+        console.log(snapshot.docs[0].data());
         
+
       } catch (error) {
-          setError(error);
+        console.log(error);
+          
+        setError(error);
+          
       }
       
       

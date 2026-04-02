@@ -13,6 +13,7 @@ const NavTest = ({setShowSubject}) => {
         tc.setTest(selectedTest);
         tc.setTestResult(prev=>({...prev , testId:e.target.id}));
         tc.setStartExam(true);
+        
   }
 
 
@@ -27,10 +28,7 @@ const NavTest = ({setShowSubject}) => {
         </div>
         <div className='w-full max-h-[95%] overflow-scroll  pb-10'> 
 
-
-
           {tc.testData.length > 0 &&
-          
           tc.testData.reverse().map((test,idx)=>{
           return(
             <div  className='relative hover:bg-gray-200 w-[90%] h-[10%] mt-[3%] bg-gray-300  rounded-2xl flex p-[2%] items-center gap-x-2 border hover:border-l-4 hover:border-purple-700' key={idx} >
@@ -42,7 +40,7 @@ const NavTest = ({setShowSubject}) => {
           )
         })}
       {
-          tc.testData.length<= 0 && 
+          tc.testData.length <= 0 && 
           <div className='w-full h-full flex  flex-col items-center justify-center text-3xl font-bold text-gray-300'>
             <div className='w-full flex justify-center'>
               <RiFolderOpenLine size={200}/>
