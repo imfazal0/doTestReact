@@ -1,5 +1,6 @@
 import { RiArrowLeftLine, RiRestartLine, RiTrophyFill } from '@remixicon/react'
 import React, { useEffect, useState } from 'react'
+import { useNavigate, useNavigation } from 'react-router-dom';
 
 const Header = ({ subject , selectedSub , setSelectedSub }) => {
    
@@ -9,6 +10,7 @@ const Header = ({ subject , selectedSub , setSelectedSub }) => {
     },[selectedSub])
 
 
+const navigate = useNavigate()
 
 
 
@@ -25,7 +27,7 @@ const Header = ({ subject , selectedSub , setSelectedSub }) => {
                     </div>
                 </div>
                 <div className='md:w-1/3 w-full flex justify-center items-center gap-x-2 mt-5'>
-                    <div className='font-bold md:text-xl text-lg flex items-center justify-center bg-purple-800 p-3 rounded-xl'>
+                    <div onClick={()=>{navigate('/')}} className='font-bold md:text-xl text-lg flex items-center justify-center bg-purple-800 p-3 rounded-xl'>
                         <RiArrowLeftLine />
                         <div>
                             Back To DashBoard

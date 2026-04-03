@@ -1,3 +1,3 @@
 export const formatText = (text) =>{
-    return text.replaceAll('_', ' ');
+    return text?.replaceAll('_', ' ');
 }

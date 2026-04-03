@@ -6,38 +6,42 @@ import LoginPage from './LoginPage';
 import useAuth from '../utils/useAuth'
 import AllTestGrid from '../components/analytics/AllTestGrid';
 import UserInfo from '../context/userInfo';
+import LeaderBoard from '../components/analytics/LeaderBoard';
 
 const AnalyticsPage = () => {
   const uc = useContext(UserInfo);
   const [subject , setSubject] = useState([]);
   const [error , setError] = useState(null);
   const [selectedSub , setSelectedSub] = useState('Python');
-  const [testResults , setTestResults] = useState([])
   const [allTest, setAllTest ] = useState([])
+  const [selectedTest, setSelectedTest ] = useState(null)
+  const [allResults ,  setAllResults] = useState([]);
+  const [showSelSub ,setShowSelSub  ] = useState(true);
+
+
   useEffect(()=>{
            async function getSubject(db) {
             try{
               const subjectRef = collection(db, 'All_Subjects');
               const subjectSnapshot = await getDocs(subjectRef);
-          
+              setSubject([])
               subjectSnapshot.docs.forEach((elm)=>{
                 setSubject(prev=>([...prev , {
                   sub: elm.data().subject,
                   icon: elm.data().icon,
                 }]));
               })
-              // console.log(subject);
 
             } catch (err){
                 setError(err);
             }
+
               }
           
               return () => getSubject(db);
       },[uc.user])
   
       useEffect(()=>{
-        console.log(subject);
         
       },[subject])
 
@@ -49,7 +53,7 @@ const AnalyticsPage = () => {
             )
             const snapShot = await getDocs(q);
             setAllTest(snapShot.docs);
-
+            setShowSelSub(true)
           }
           getAllTest();
 
@@ -65,16 +69,29 @@ const AnalyticsPage = () => {
         const subjectRef = collection(db , "testResults")
         const q = query(
             subjectRef,
-            where("subject" , "==" , selectedSub )
+            where("testId" , "==" , selectedTest ),
+            orderBy("score" , 'desc'),
+            orderBy("timeSpent" , 'asc'),
         )
         const snapShot = await getDocs(q)
-        console.log(snapShot.docs);
+        setAllResults(snapShot.docs);
         
-
       }
 
+    
+      
+
       getAllTest()
-    },[selectedSub])
+    },[selectedTest])
+
+    useEffect(()=>{
+      allResults.forEach((res)=>{
+        console.log(res.data());
+        
+      })
+      
+    },[allResults])
+
 
 
 
@@ -86,8 +103,14 @@ const AnalyticsPage = () => {
     ):(
     <div className='w-full h-full p-[2%] '>
       <Header subject={subject} selectedSub={selectedSub} setSelectedSub={setSelectedSub} />
-      {/* <AllTestGrid allTest={allTest} selectedSub={selectedSub}  /> */}
-      
+      {
+        showSelSub &&
+        <AllTestGrid allTest={allTest} selectedSub={selectedSub} setSelectedTest={setSelectedTest} setShowSelSub={setShowSelSub} />
+      }
+      {
+        !showSelSub &&
+      <LeaderBoard selectedTest={selectedTest} allResults={allResults} setShowSelSub={setShowSelSub}/>
+      }
     </div>
   )
 }

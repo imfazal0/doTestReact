@@ -1,9 +1,11 @@
 import { RiBarChartLine, RiQuestionFill } from '@remixicon/react';
 import React from 'react'
 
-const TestCard = ({testData , selectedSub , allQuestion}) => {
-    console.log(testData);
-    
+const TestCard = ({testData , selectedSub , allQuestion, setSelectedTest , setShowSelSub}) => {
+    function handleSelect(){
+        setSelectedTest(testData)
+        setShowSelSub(false)
+    }
   return (
     <div className='w-[22%] h-[30vh] bg-gray-100 border border-purple-700 rounded-2xl p-[2%] grid m-2 hover:scale-[1.02] hover:shadow-2xl transition-all transition-50'>
         <div className='font-bold'>
@@ -16,7 +18,7 @@ const TestCard = ({testData , selectedSub , allQuestion}) => {
             <RiQuestionFill size={16}/>
             {allQuestion}
         </div>
-        <div className='flex font-bold bg-purple-700 rounded-lg text-white items-center justify-center'>
+        <div className='flex font-bold bg-purple-700 rounded-lg text-white items-center justify-center' onClick={handleSelect}>
            <RiBarChartLine />
            View LeaderBoard
         </div>

@@ -49,7 +49,7 @@ const TestContainer = () => {
       timestamp: serverTimestamp(),
       timeSpent: timeSpent,
       totalQuestions: maxMarks,
-      name: uc.user.name,
+      userName: uc.user.name,
       email: uc.user.email,
       userId: uc.user.uid
     }))
@@ -65,7 +65,7 @@ const TestContainer = () => {
           timestamp: serverTimestamp(),
           timeSpent: timeSpent,
           totalQuestions: maxMarks,
-          name: uc.user.name,
+          userName: uc.user.name,
           email: uc.user.email,
           userId: uc.user.uid
         }
