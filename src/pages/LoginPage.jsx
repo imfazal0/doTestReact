@@ -12,7 +12,6 @@ function LoginPage() {
 
   function handleLogin(){
     signInWithPopup(auth , provider).then((result)=>{
-      console.log(result);
       
       
     })

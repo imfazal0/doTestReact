@@ -5,7 +5,6 @@ import { useNavigate, useNavigation } from 'react-router-dom';
 const Header = ({ subject , selectedSub , setSelectedSub }) => {
    
     useEffect(()=>{
-        console.log(selectedSub);
         
     },[selectedSub])
 

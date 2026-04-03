@@ -84,13 +84,7 @@ const AnalyticsPage = () => {
       getAllTest()
     },[selectedTest])
 
-    useEffect(()=>{
-      allResults.forEach((res)=>{
-        console.log(res.data());
-        
-      })
-      
-    },[allResults])
+    
 
 
 

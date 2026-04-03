@@ -10,7 +10,6 @@ const TestDataContext = ({children}) => {
     });
 
     useEffect(()=>{
-        console.log(testResult);
     },[testResult])
 
 

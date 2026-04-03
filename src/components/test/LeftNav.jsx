@@ -32,12 +32,10 @@ const LeftNav = ({setStartExam , setTestData}) => {
       )
         const snapshot = await getDocs(q);
         tc.setTestData(snapshot.docs)
-        console.log("hello");
-        console.log(snapshot.docs[0].data());
+       
         
 
       } catch (error) {
-        console.log(error);
           
         setError(error);
           
