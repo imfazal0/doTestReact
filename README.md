@@ -1,7 +1,7 @@
 
 # Do Test (Rebuild Using React)
 
-This is A full Stack MCQ Test Platform , complete build using React Js. 
+This is A full Stack MCQ Test Platform , completely build using React Js. 
 Features:
 1. user can take test 
 2. user can view Score 
@@ -31,7 +31,7 @@ Features:
 
 😄 FrontEnd Web and App Development 
 
-⚡️ Fun fact : You Can Follow Me 😂😂 on 
+⚡️ Fun fact : You Can Follow Me 😂😂 on Instagram
 
 
 # 📫 How to reach me...
