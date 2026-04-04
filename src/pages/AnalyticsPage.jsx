@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import Header from '../components/analytics/Header'
 import { db } from '../../firebaseConfig/config';
-import { collection, getDocs, orderBy, query, where  } from 'firebase/firestore';
+import { collection, getDocs, orderBy, query, where } from 'firebase/firestore';
 import LoginPage from './LoginPage';
 import useAuth from '../utils/useAuth'
 import AllTestGrid from '../components/analytics/AllTestGrid';
@@ -10,100 +10,130 @@ import LeaderBoard from '../components/analytics/LeaderBoard';
 
 const AnalyticsPage = () => {
   const uc = useContext(UserInfo);
-  const [subject , setSubject] = useState([]);
-  const [error , setError] = useState(null);
-  const [selectedSub , setSelectedSub] = useState('Python');
-  const [allTest, setAllTest ] = useState([])
-  const [selectedTest, setSelectedTest ] = useState(null)
-  const [allResults ,  setAllResults] = useState([]);
-  const [showSelSub ,setShowSelSub  ] = useState(true);
+  const [subject, setSubject] = useState([]);
+  const [error, setError] = useState(null);
+  const [selectedSub, setSelectedSub] = useState('Python');
+  const [allTest, setAllTest] = useState([])
+  const [selectedTest, setSelectedTest] = useState(null)
+  const [allResults, setAllResults] = useState([]);
+  const [showSelSub, setShowSelSub] = useState(true);
+  const [loading, setLoading] = useState({
+    header: true,
+    testGrid: true,
+    lb: true,
+  });
 
 
-  useEffect(()=>{
-           async function getSubject(db) {
-            try{
-              const subjectRef = collection(db, 'All_Subjects');
-              const subjectSnapshot = await getDocs(subjectRef);
-              setSubject([])
-              subjectSnapshot.docs.forEach((elm)=>{
-                setSubject(prev=>([...prev , {
-                  sub: elm.data().subject,
-                  icon: elm.data().icon,
-                }]));
-              })
+  useEffect(() => {
+    async function getSubject(db) {
+      try {
+        const subjectRef = collection(db, 'All_Subjects');
+        const subjectSnapshot = await getDocs(subjectRef);
+        setSubject([])
+        subjectSnapshot.docs.forEach((elm) => {
+          setSubject(prev => ([...prev, {
+            sub: elm.data().subject,
+            icon: elm.data().icon,
+          }]));
+        })
 
-            } catch (err){
-                setError(err);
-            }
+      } catch (err) {
+        setError(err);
+      } finally {
+        setLoading(prev => ({ ...prev, header: false }))
+      }
 
-              }
-          
-              return () => getSubject(db);
-      },[uc.user])
-  
-      useEffect(()=>{
-        
-      },[subject])
+    }
 
-      useEffect(()=>{
-          const getAllTest = async ()=>{
-            const subjectsRef = collection(db, selectedSub);
-            const q = query(
-              subjectsRef,
-            )
-            const snapShot = await getDocs(q);
-            setAllTest(snapShot.docs);
-            setShowSelSub(true)
-          }
-          getAllTest();
+    return () => getSubject(db);
+  }, [uc.user])
 
-      },[selectedSub])
-      
-      
-   
-   
-   
-   
-      useEffect(()=>{
-      const getAllTest = async ()=>{
-        const subjectRef = collection(db , "testResults")
+  useEffect(() => {
+
+  }, [subject])
+
+  useEffect(() => {
+    if (!loading.testGrid) {
+      setLoading(prev => ({ ...prev, testGrid: true }))
+    }
+
+    const getAllTest = async () => {
+      try {
+
+        const subjectsRef = collection(db, selectedSub);
         const q = query(
-            subjectRef,
-            where("testId" , "==" , selectedTest ),
-            orderBy("score" , 'desc'),
-            orderBy("timeSpent" , 'asc'),
+          subjectsRef,
+        )
+        const snapShot = await getDocs(q);
+        setAllTest(snapShot.docs);
+        setShowSelSub(true)
+      }
+      catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(prev => ({ ...prev, testGrid: false }))
+      }
+
+    }
+    getAllTest();
+
+
+
+
+  }, [selectedSub])
+
+
+  useEffect(() => {
+    if (!loading.lb) {
+      setLoading(prev => ({ ...prev, lb: true }))
+
+    }
+
+    const getAllTest = async () => {
+      try {
+        const subjectRef = collection(db, "testResults")
+        const q = query(
+          subjectRef,
+          where("testId", "==", selectedTest),
+          orderBy("score", 'desc'),
+          orderBy("timeSpent", 'asc'),
         )
         const snapShot = await getDocs(q)
         setAllResults(snapShot.docs);
-        
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(prev => ({ ...prev, lb: false }))
       }
 
-    
-      
-
-      getAllTest()
-    },[selectedTest])
-
-    
+    }
 
 
 
 
+    getAllTest()
+  }, [selectedTest])
 
-    const user = useAuth();
 
-    return !user ? (
-      <LoginPage/>
-    ):(
+
+
+
+
+
+  const user = useAuth();
+
+  return !user ? (
+    <LoginPage />
+  ) : (
     <div className='w-full h-full p-[2%] '>
-      <Header subject={subject} selectedSub={selectedSub} setSelectedSub={setSelectedSub} />
+      <Header subject={subject} selectedSub={selectedSub} setSelectedSub={setSelectedSub} loading={loading.header} />
       {
         showSelSub &&
-        <AllTestGrid allTest={allTest} selectedSub={selectedSub} setSelectedTest={setSelectedTest} setShowSelSub={setShowSelSub} />
+        <AllTestGrid allTest={allTest} selectedSub={selectedSub} setSelectedTest={setSelectedTest} setShowSelSub={setShowSelSub} loading={loading.testGrid} />
       }
       {
         !showSelSub &&
-      <LeaderBoard selectedTest={selectedTest} allResults={allResults} setShowSelSub={setShowSelSub}/>
+        <LeaderBoard selectedTest={selectedTest} allResults={allResults} setShowSelSub={setShowSelSub} loading={loading.lb} />
       }
     </div>
   )

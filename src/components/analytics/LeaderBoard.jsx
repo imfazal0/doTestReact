@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { formatText } from '../../utils/FormatText'
-import { RiArrowLeftLine, RiFileExcel2Line } from '@remixicon/react'
+import { RiArrowLeftLine, RiFileExcel2Line, RiFolderInfoLine } from '@remixicon/react'
 import dayjs from 'dayjs'
-const LeaderBoard = ({ selectedTest, allResults,setShowSelSub }) => {
+const LeaderBoard = ({ selectedTest, allResults,setShowSelSub , loading }) => {
     const [bestResults, setBestResults] = useState([]);
     const [allBestResults, setAllBestResults] = useState([]);
     const seenUsers = new Set();
@@ -40,7 +40,7 @@ const LeaderBoard = ({ selectedTest, allResults,setShowSelSub }) => {
             <div className='bg-blue-50 w-full h-1/5 font-bold uppercase p-[2%] text-black text-4xl border-b border-gray-300 '>
                 <div>{formatText(selectedTest)} - LeaderBoard</div>
                 <div> 
-                    <button className='text-xl bg-gray-300 p-2 rounded-xl hover:bg-gray-400 flex items-center justify-center' onClick={()=>{setShowSelSub(true)}}>
+                    <button className='text-xl mt-5 bg-gray-300 p-2 rounded-xl hover:bg-gray-400 flex items-center justify-center' onClick={()=>{setShowSelSub(true)}}>
                         <RiArrowLeftLine />
                         GoBack
                     </button>
@@ -62,7 +62,7 @@ const LeaderBoard = ({ selectedTest, allResults,setShowSelSub }) => {
             </div>
             <div className='w-full '>
                 <table className='w-full h-full table-fixed text-xl '>
-                    <tr className='h-[10vh] border-b bg-amber-200 border-gray-300'>
+                    <tr className='h-[10vh] border-b  border-gray-300'>
                         <th className=' w-1/20'>Rank</th>
                         <th className=' w-[15%]'>Name Of Candidate</th>
                         <th className=' w-1/20'>Score</th>
@@ -71,9 +71,15 @@ const LeaderBoard = ({ selectedTest, allResults,setShowSelSub }) => {
                     </tr>
 
                     {
+                        !loading && 
                         bestResults.map((res, idx) => (
                             <tr className='h-[5vh] border-b  border-gray-300 text-lg font-'>
-                                <th className=' w-1/20'>{idx + 1}</th>
+                                <th className=' w-1/20 '>
+                                <div className='w-full flex justify-center items-center flex-col'>
+                                    {idx===0 && <img src='./public/medal_01.gif' className='h-10 mix-blend-multiply'/>}
+                                    {idx + 1}
+                                </div>
+                                </th>
                                 <th className=' w-[15%]'>{res.data().userName}</th>
                                 <th className=' w-1/20'>{(res.data().score).toFixed(1)} %</th>
                                 <th className=' w-1/20'>{res.data().timeSpent}m</th>
@@ -84,10 +90,31 @@ const LeaderBoard = ({ selectedTest, allResults,setShowSelSub }) => {
 
 
                     }
+                   
 
 
 
                 </table>
+                 {
+                        loading &&
+                        <>
+                            <div className='w-full h-[5vh] border-b border-gray-300 bg-gray-200 animate-pulse text-lg font-'></div>
+                            <div className='w-full h-[5vh] border-b border-gray-300 bg-gray-200 animate-pulse text-lg font-'></div>
+                            <div className='w-full h-[5vh] border-b border-gray-300 bg-gray-200 animate-pulse text-lg font-'></div>
+                            <div className='w-full h-[5vh] border-b border-gray-300 bg-gray-200 animate-pulse text-lg font-'></div>
+                            <div className='w-full h-[5vh] border-b border-gray-300 bg-gray-200 animate-pulse text-lg font-'></div>
+                            <div className='w-full h-[5vh] border-b border-gray-300 bg-gray-200 animate-pulse text-lg font-'></div>
+                        </>
+
+                    }
+                    {
+                        bestResults.length<=0 && !loading &&
+                        <div className='w-full h-full flex flex-col items-center justify-center text-3xl font-bold text-gray-300 mt-25' >
+                            <RiFolderInfoLine size={100}  />
+                            No Results Found
+                        </div>
+
+                    }
             </div>
         </div>
     )

@@ -2,7 +2,7 @@ import { RiArrowLeftLine, RiRestartLine, RiTrophyFill } from '@remixicon/react'
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useNavigation } from 'react-router-dom';
 
-const Header = ({ subject , selectedSub , setSelectedSub }) => {
+const Header = ({ subject , selectedSub , setSelectedSub , loading }) => {
    
     useEffect(()=>{
         
@@ -14,7 +14,7 @@ const navigate = useNavigate()
 
 
     return (
-        <div className='w-full h-4/12 bg-linear-to-br from-purple-700 to-purple-300 rounded-2xl text-white text-2xl p-[2%] flex flex-col overflow-hidden'>
+        <div className='w-full md:h-4/12 bg-linear-to-br from-purple-700 to-purple-300 rounded-2xl text-white text-2xl p-[2%] flex flex-col overflow-hidden'>
             <div className='w-full h-1/2 flex md:flex-row flex-col justify-between mb-5'>
                 <div className='md:w-1/3 w-full flex flex-col'>
                     <div className='flex items-center'>
@@ -42,11 +42,12 @@ const navigate = useNavigate()
             </div>
 
             {/* selectSub */}
-            <div className='w-full h-1/2 flex items-center bg-purple-800 rounded-2xl justify-center  flex-row-reverse flex-nowrap overflow-x-auto gap-5 p-1 '>
+            <div className='w-full md:h-1/2  flex flex-col-reverse  md:items-center bg-purple-800 rounded-2xl md:justify-center  md:flex-row-reverse flex-nowrap overflow-x-auto gap-5 p-1 '>
                 {
+                    !loading &&
                     subject.map((subject, index) => {
                         return (
-                            <div key={index} className={`min-w-40 h-full rounded-xl text-sm flex items-center justify-center font-bold px-5 ${selectedSub === subject.sub ?' bg-white text-purple-800' : 'bg-transparent'}` } 
+                            <div key={index} className={`min-w-40 md:h-full h-[5vh] rounded-xl text-sm flex items-center md:justify-center font-bold px-5 ${selectedSub === subject.sub ?' bg-white text-purple-800' : 'bg-transparent'}` } 
 
                                 onClick={()=>{setSelectedSub(subject.sub)}}
                             >
@@ -56,6 +57,19 @@ const navigate = useNavigate()
                         )
                     })
                 }
+                {
+                    loading &&
+                    <>
+                            <div  className='w-full h-full bg-gray-300 animate-pulse rounded-xl text-sm flex items-center justify-center font-bold px-5 '> </div>
+                            <div  className='w-full h-full bg-gray-300 animate-pulse rounded-xl text-sm flex items-center justify-center font-bold px-5 '> </div>
+                            <div  className='w-full h-full bg-gray-300 animate-pulse rounded-xl text-sm flex items-center justify-center font-bold px-5 '> </div>
+                            <div  className='w-full h-full bg-gray-300 animate-pulse rounded-xl text-sm flex items-center justify-center font-bold px-5 '> </div>
+                            <div  className='w-full h-full bg-gray-300 animate-pulse rounded-xl text-sm flex items-center justify-center font-bold px-5 '> </div>
+                            <div  className='w-full h-full bg-gray-300 animate-pulse rounded-xl text-sm flex items-center justify-center font-bold px-5 '> </div>
+                    </>
+
+                }
+
             </div>
         </div>
     )

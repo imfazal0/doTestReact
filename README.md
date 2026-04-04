@@ -1,16 +1,42 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Do Test (Rebuild Using React)
 
-Currently, two official plugins are available:
+This is A full Stack MCQ Test Platform , complete build using React Js. 
+Features:
+1. user can take test 
+2. user can view Score 
+3. user can look previous test
+4. user can view leaderboard 
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
-## React Compiler
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+## Technologies Used In This Application
+1. React js
+2. React Context API For State Management
+3. Tailwind CSS
+4. Vite 
+## Screenshots
+![App Screenshot](assets/pre01.png)
+![App Screenshot](assets/pre02.png)
+![App Screenshot](assets/pre03.png)
+
+
+## Other Common Github Profile Sections
+👩‍💻 I'm currently learning Redux ToolKit For React
+
+🤔 I'm BCA underGraduate
+
+😄 FrontEnd Web and App Development 
+
+⚡️ Fun fact : You Can Follow Me 😂😂 on 
+
+
+# 📫 How to reach me...
+[Instagram](https://www.instagram.com/imfazal0/)
+
+[Whatsapp](https://wa.link/934ch1)
+
+[Telegram](https://t.me/Imfazal0)

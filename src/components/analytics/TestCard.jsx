@@ -7,7 +7,7 @@ const TestCard = ({testData , selectedSub , allQuestion, setSelectedTest , setSh
         setShowSelSub(false)
     }
   return (
-    <div className='w-[22%] h-[30vh] bg-gray-100 border border-purple-700 rounded-2xl p-[2%] grid m-2 hover:scale-[1.02] hover:shadow-2xl transition-all transition-50'>
+    <div className='md:w-[22%] w-full md:h-[30vh] h-[20vh] bg-gray-100 border border-purple-700 rounded-2xl p-[2%] grid m-2 hover:scale-[1.02] hover:shadow-2xl transition-all transition-50'>
         <div className='font-bold'>
             Test Name : {selectedSub}
         </div>
