@@ -7,6 +7,7 @@ import useAuth from '../utils/useAuth'
 import AllTestGrid from '../components/analytics/AllTestGrid';
 import UserInfo from '../context/userInfo';
 import LeaderBoard from '../components/analytics/LeaderBoard';
+import { getSubject } from '../utils/FetchData';
 
 const AnalyticsPage = () => {
   const uc = useContext(UserInfo);
@@ -25,32 +26,13 @@ const AnalyticsPage = () => {
 
 
   useEffect(() => {
-    async function getSubject(db) {
-      try {
-        const subjectRef = collection(db, 'All_Subjects');
-        const subjectSnapshot = await getDocs(subjectRef);
-        setSubject([])
-        subjectSnapshot.docs.forEach((elm) => {
-          setSubject(prev => ([...prev, {
-            sub: elm.data().subject,
-            icon: elm.data().icon,
-          }]));
-        })
-
-      } catch (err) {
-        setError(err);
-      } finally {
-        setLoading(prev => ({ ...prev, header: false }))
-      }
-
-    }
-
-    return () => getSubject(db);
+    getSubject().then((result)=>{
+      setSubject(result.subject);
+      setLoading(result.loading);
+    })
   }, [uc.user])
 
-  useEffect(() => {
 
-  }, [subject])
 
   useEffect(() => {
     if (!loading.testGrid) {

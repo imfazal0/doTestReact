@@ -52,7 +52,7 @@ const navigate = useNavigate()
                                 onClick={()=>{setSelectedSub(subject.sub)}}
                             >
                                 <img src={subject.icon} alt="Subject Image" className='h-1/2 aspect-square' />
-                                <p className='pr-5'>{subject.sub}</p>
+                                <p className='pr-5'>{subject.subject}</p>
                             </div>
                         )
                     })

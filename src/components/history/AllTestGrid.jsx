@@ -1,10 +1,20 @@
 import React from 'react'
 import TestCard from './TestCard'
+import { data } from 'react-router-dom'
 
-const AllTestGrid = () => {
+const AllTestGrid = ({filterData}) => {
+
+
+
+
   return (
-    <div className='w-screen '>
-            <TestCard/>
+    <div className='w-full flex flex-wrap gap-3 justify-center '>
+      {
+        filterData.map((data,idx) =>(
+          <TestCard data={data} key={idx}/>
+        ))
+
+      }
         
     </div>
   )

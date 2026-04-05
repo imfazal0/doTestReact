@@ -1,22 +1,29 @@
+import dayjs from 'dayjs'
 import React from 'react'
 
-const TestCard = () => {
+const TestCard = ({data}) => {
   return (
-    <div className='w-[25vw] h-[30vh] bg-gray-300 rounded-2xl border-l-4 border-purple-700 p-[1%] grid grid-row-5 font-semibold text-xl'>
-        <div className=''> Python</div>
-        <div className=''> </div>
-        <div className=' text-sm text-purple-700'> Test Id : python_7148 </div>
-        <div className=' text-3xl text-purple-700 font-bold'> 66 %</div>
-        <div className=' text-xs text-purple-700 font-bold flex justify-evenly'> 
-            <div>Correct : 25 </div>
-            <div>Total : 50 </div>
+    <div className='w-[25vw] h-[30vh] bg-gray-300 rounded-2xl border-l-4 border-purple-700 p-[1%] flex flex-col gap-5  font-semibold text-xl'>
+      <div className='grid grid-cols-2 w-full h-[60%]'>
+        <div>
+          <div className='flex justify-between'><div>{data.subject}</div></div>
+          <div className=' text-sm text-purple-700'> Test Id : {data.testId} </div>
         </div>
-        <div className='flex justify-around text-white'>
-            <button className='bg-gra'>Complte Review</button>
-            <button>Delete Test</button>
-        </div>
+        <div className=' text-5xl text-purple-700 font-bold drop-shadow-sm flex items-center justify-center'> {(data.score).toFixed(1)}%</div>
+      </div>
+      <div className='text-sm'>{dayjs.unix(data.timestamp.seconds).format("DD MMM YYYY")}</div>
+      <div className=' text-xs text-black font-bold flex gap-5 w-full h-1/12 '>
+        <div>Correct Answer : {data.correctAnswers} </div>
+        <div>Total Question : {data.totalQuestions} </div>
+      </div>
+      <div className='grid grid-cols-2 gap-2 justify-around text-white w-full h-1/3'>
+        <button className='bg-purple-700 px-2 rounded-xl hover:bg-purple-600 '>Complte Review</button>
+        <button className='bg-red-300 px-2 text-red-700 rounded-xl hover:bg-red-400 ' >Delete Test</button>
+      </div>
     </div>
   )
 }
+
+
 
 export default TestCard
