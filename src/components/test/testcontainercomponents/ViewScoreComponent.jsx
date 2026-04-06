@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom';
 const ViewScoreComponent = () => {
     const tc = useContext(testData);
     useEffect(()=>{
-        console.log(tc.testResult);
         
     })
     const navigate = useNavigate();

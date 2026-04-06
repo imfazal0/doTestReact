@@ -31,7 +31,6 @@ export const getAllTest = async (uid) => {
     let tests = []
     let loading = true;
     try {
-        console.log(uid);
         
         const subjectsRef = collection(db, "testResults");
         const q = query(
@@ -40,7 +39,10 @@ export const getAllTest = async (uid) => {
         )
         const snapShot = await getDocs(q);
         snapShot.docs.forEach((doc)=>{
-            tests.push(doc.data())
+            tests.push({
+                data : doc.data(),
+                id : doc.id
+            })
         })  
     }
     catch (err) {

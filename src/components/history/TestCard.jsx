@@ -1,7 +1,15 @@
 import dayjs from 'dayjs'
 import React from 'react'
 
-const TestCard = ({data}) => {
+const TestCard = ({data , setSelectedTest , id}) => {
+
+  function handleDelete(e){
+    setSelectedTest(id)
+    console.log(id);
+  } 
+  
+
+
   return (
     <div className='w-[25vw] h-[30vh] bg-gray-300 rounded-2xl border-l-4 border-purple-700 p-[1%] flex flex-col gap-5  font-semibold text-xl'>
       <div className='grid grid-cols-2 w-full h-[60%]'>
@@ -18,7 +26,7 @@ const TestCard = ({data}) => {
       </div>
       <div className='grid grid-cols-2 gap-2 justify-around text-white w-full h-1/3'>
         <button className='bg-purple-700 px-2 rounded-xl hover:bg-purple-600 '>Complte Review</button>
-        <button className='bg-red-300 px-2 text-red-700 rounded-xl hover:bg-red-400 ' >Delete Test</button>
+        <button className='bg-red-300 px-2 text-red-700 rounded-xl hover:bg-red-400 ' onClick={handleDelete} >Delete Test</button>
       </div>
     </div>
   )

@@ -3,7 +3,7 @@ import React from 'react'
 import { formatText } from '../../utils/FormatText'
 import dayjs from 'dayjs';
 
-const Filters = ({ subject, setSelectedSub, setTest, setDate ,clearFilter }) => {
+const Filters = ({ subject, setSelectedSub, setTest, setDate ,clearFilter , setScore}) => {
     const timestamps = {
         today: dayjs().startOf('day').unix(),
         last_week: dayjs().subtract(7, 'day').startOf('day').unix(),
@@ -21,7 +21,9 @@ const Filters = ({ subject, setSelectedSub, setTest, setDate ,clearFilter }) => 
     function handleDate(e) {
         setDate(timestamps[e.target.value]);
     }
-
+    function handleRange(e){
+        setScore(e.target.value)
+    }
 
     return (
         <div className='w-full h-[25vh] bg-gray-300  rounded-2xl border-t-5 py-[2%] border-purple-700 text-gray-600 p-[1%] font-semibold '>
@@ -83,12 +85,12 @@ const Filters = ({ subject, setSelectedSub, setTest, setDate ,clearFilter }) => 
 
 
                 <div className='w-1/4  flex justify-center  flex-col'>
-                    <div className='flex  gap-2 text-xl items-center'>
+                    <div className='flex  gap-2 text-xl items-center' >
                         <RiRulerLine />
                         Select Score Range
                     </div>
                     <div>
-                        <input type="range" className='w-full h-[5vh] bg-gray-200 border rounded-lg pl-3 ' placeholder='Search Test' />
+                        <input type="range" onChange={handleRange} className='w-full h-[5vh] bg-gray-200 border rounded-lg pl-3 ' placeholder='Search Test' />
                     </div>
                 </div>
 
