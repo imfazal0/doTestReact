@@ -5,10 +5,10 @@ import { useNavigate } from 'react-router-dom'
 const Header = () => {
     const navigate = useNavigate();
     return (
-        <div className='w-full h-[20vh] bg-linear-to-l from-purple-700 to-purple-500 rounded-2xl p-[2%] px-[5%] text-white flex justify-between'>
+        <div className='w-full h-[20vh] bg-linear-to-l from-purple-700 to-purple-500 rounded-2xl p-[2%] px-[5%] text-white flex justify-between flex-col md:flex-row'>
             <div className='flex flex-col'>
-                <div className=' font-bold text-3xl flex  items-center'>
-                    <RiHistoryLine size={50} />
+                <div className=' font-bold md:text-3xl flex  items-center gap-2'>
+                    <RiHistoryLine  />
                     Test History
                 </div>
                 <div>
@@ -16,12 +16,12 @@ const Header = () => {
                 </div>
 
             </div>
-            <div className='flex items-center gap-3'>
-                <div className='flex items-center font-bold p-[1%] h-1/2 rounded-2xl bg-purple-500 whitespace-nowrap' onClick={()=>{navigate('/')}}>
+            <div className='flex items-center gap-3 h-full'>
+                <div className='flex items-center font-bold p-[1%] h-1/2 md:rounded-2xl rounded-xl px-2 md:bg-purple-500 bg-purple-800  whitespace-nowrap' onClick={()=>{navigate('/')}}>
                         <RiArrowLeftLine />
                         Back to DashBoard
                 </div>
-                <div className='flex items-center font-bold p-[1%] h-1/2 rounded-2xl bg-purple-500 whitespace-nowrap '>
+                <div className='flex items-center font-bold p-[1%] h-1/2 md:rounded-2xl rounded-xl px-2 md:bg-purple-500 bg-purple-800  whitespace-nowrap '>
                         <RiFileExcelLine className='mr-2' />
                         Export All Data
                 </div>

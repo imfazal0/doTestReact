@@ -26,20 +26,21 @@ const Filters = ({ subject, setSelectedSub, setTest, setDate ,clearFilter , setS
     }
 
     return (
-        <div className='w-full h-[25vh] bg-gray-300  rounded-2xl border-t-5 py-[2%] border-purple-700 text-gray-600 p-[1%] font-semibold '>
-            <div className='flex justify-between'>
-                <div className='flex items-center font-bold text-2xl'>
-                    <RiFilterFill size={40} />
+        <div className='w-full h-[25vh] bg-gray-300  rounded-2xl border-t-5 py-[2%] border-purple-700 text-gray-600 p-[1%] font-semibold md:text-xl text-sm flex-col'>
+            <div className='flex  justify-between'>
+                <div className='flex items-center font-bold md:text-2xl'>
+                    <RiFilterFill />
                     Filter Tests
                 </div>
                 <div className='bg-gray-400 p-[1%] text-white rounded-xl ' onClick={clearFilter}>
                     Clear Filters
                 </div>
             </div>
-            <div className='flex h-full items-center gap-5 '>
 
-                <div className='w-1/4  flex justify-center  flex-col'>
-                    <div className='flex gap-2 text-xl items-center'>
+            <div className='flex md:h-full  items-center gap-5  flex-row flex-wrap justify-center'>
+
+                <div className='md:w-1/4 w-[40%]  flex justify-center  flex-col'>
+                    <div className='flex gap-2 items-center'>
                         <RiSearchLine />
                         Search
                     </div>
@@ -48,8 +49,8 @@ const Filters = ({ subject, setSelectedSub, setTest, setDate ,clearFilter , setS
                     </div>
                 </div>
 
-                <div className='w-1/4  flex justify-center  flex-col'>
-                    <div className='flex gap-2 text-xl items-center'>
+                <div className='md:w-1/4 w-[40%]  flex justify-center  flex-col'>
+                    <div className='flex gap-2 items-center'>
                         <RiFileTextLine />
                         Subject
                     </div>
@@ -67,8 +68,8 @@ const Filters = ({ subject, setSelectedSub, setTest, setDate ,clearFilter , setS
                     </div>
                 </div>
 
-                <div className='w-1/4  flex justify-center  flex-col'>
-                    <div className='flex gap-2 text-xl items-center'>
+                <div className='md:w-1/4 w-[40%]  flex justify-center  flex-col'>
+                    <div className='flex gap-2 items-center'>
                         <RiCalendarLine />
                         Select Date Range
                     </div>
@@ -84,8 +85,8 @@ const Filters = ({ subject, setSelectedSub, setTest, setDate ,clearFilter , setS
                 </div>
 
 
-                <div className='w-1/4  flex justify-center  flex-col'>
-                    <div className='flex  gap-2 text-xl items-center' >
+                <div className='md:w-1/4 w-[40%]  flex justify-center  flex-col'>
+                    <div className='flex  gap-2 items-center' >
                         <RiRulerLine />
                         Select Score Range
                     </div>

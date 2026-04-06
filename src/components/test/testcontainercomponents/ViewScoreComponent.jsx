@@ -22,7 +22,7 @@ const ViewScoreComponent = () => {
                 <div className='w-1/2 h-full bg-emerald-200 rounded-2xl  flex items-center justify-center font-bold text-green-900 text-center'>{tc.testResult.correctAnswers}/{tc.testResult.totalQuestions}<br/> Score</div>                
             </div>
             <div className='w-full h-[8vh] flex gap-5 mt-10'>
-                <div className='w-1/2 h-full bg-purple-700 hover:bg-purple-900 shadow-xl shadow-purple-400  rounded-2xl  text-white font-bold text-xl flex items-center justify-center '>
+                <div className='w-1/2 h-full bg-purple-700 hover:bg-purple-900 shadow-xl shadow-purple-400  rounded-2xl  text-white font-bold text-xl flex items-center justify-center ' onClick={()=>{navigate('/review')}}>
                     <img src="./public/evolution.gif" alt="chart" className='h-[50%] aspect-square mix-blend-color-burn md:mr-1' />
                     Get Complete Review
                 </div>

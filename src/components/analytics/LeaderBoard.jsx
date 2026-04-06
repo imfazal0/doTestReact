@@ -46,11 +46,11 @@ const LeaderBoard = ({ selectedTest, allResults,setShowSelSub , loading }) => {
                     </button>
                 </div>
             </div>
-            <div className='w-full h-[10vh] bg-white flex justify-between items-center px-[2%]'>
-                <div className='w-1/12 h-9/12 bg-purple-700 text-white font-bold rounded-xl  flex items-center justify-center'>All Time</div>
-                <div className='w-1/2 h-full flex'>
+            <div className='w-full h-[10vh] bg-white flex justify-between items-center px-[2%] gap-5'>
+                <div className='md:w-1/12 md:h-9/12 bg-purple-700 text-white font-bold rounded-xl  flex items-center justify-center md:text-xl text-sm whitespace-nowrap w-1/4 h-1/2'>All Time</div>
+                <div className='w-full h-full flex gap-5'>
                     <div className='w-full h-full flex items-center justify-center'>
-                        <input onChange={handleSearch} type="text" placeholder='Search User' className='w-8/12 bg-gray-200 h-7/12 border border-gray-400 outline-0  rounded-lg p-[2%] ' />
+                        <input onChange={handleSearch} type="text" placeholder='Search User' className='md:w-8/12 w-full bg-gray-200 h-7/12 border border-gray-400 outline-0  rounded-lg p-[2%] ' />
                     </div>
                     <div className='w-3/12 h-full flex justify-center items-center' >
                         <button className='bg-purple-700 text-white w-full rounded-sm flex h-7/12 items-center justify-center font-bold'>
@@ -61,8 +61,8 @@ const LeaderBoard = ({ selectedTest, allResults,setShowSelSub , loading }) => {
                 </div>
             </div>
             <div className='w-full '>
-                <table className='w-full h-full table-fixed text-xl '>
-                    <tr className='h-[10vh] border-b  border-gray-300'>
+                <table className='w-full h-full table-fixed md:text-xl text-sm'>
+                    <tr className='md:h-[10vh] h-[5vh] border-b  border-gray-300'>
                         <th className=' w-1/20'>Rank</th>
                         <th className=' w-[15%]'>Name Of Candidate</th>
                         <th className=' w-1/20'>Score</th>
@@ -73,11 +73,12 @@ const LeaderBoard = ({ selectedTest, allResults,setShowSelSub , loading }) => {
                     {
                         !loading && 
                         bestResults.map((res, idx) => (
-                            <tr className='h-[5vh] border-b  border-gray-300 text-lg font-'>
+                            <tr className='h-[5vh] border-b  border-gray-300 md:text-lg font-semibold text-sm'>
                                 <th className=' w-1/20 '>
                                 <div className='w-full flex justify-center items-center flex-col'>
-                                    {idx===0 && <img src='./public/medal_01.gif' className='h-10 mix-blend-multiply'/>}
-                                    {idx + 1}
+                                    {idx===0 && <img src='./public/medal_01.gif' className='h-10 mix-blend-multiply '/>}
+                                    {idx===1 && <img src='./public/medal_02.gif' className='h-10 mix-blend-multiply '/>}
+                                    {idx>3}
                                 </div>
                                 </th>
                                 <th className=' w-[15%]'>{res.data().userName}</th>

@@ -1,6 +1,6 @@
 import { RiCloseCircleLine } from '@remixicon/react'
 import React from 'react'
-import { delDoc } from '../utils/RemoveData'
+import { delDoc } from '../../utils/RemoveData'
 
 const DeleteModal = ({id , setSelectedTest }) => {
     function handleDel(){
@@ -8,8 +8,8 @@ const DeleteModal = ({id , setSelectedTest }) => {
         setSelectedTest('')
     }
     return (
-        <div className='w-screen h-screen top-0 left-0 fixed backdrop-blur-xs z-10 flex items-center justify-center'>
-            <div className='w-1/2 aspect-video bg-white shadow-xl rounded-2xl font-semibold flex items-center justify-center uppercase flex-col'>
+        <div className='w-screen h-screen top-0 left-0 fixed backdrop-blur-xs z-10 flex items-center justify-center text-sm md:text-xl text-center '>
+            <div className='md:w-1/2 w-[80%] aspect-video bg-white shadow-xl rounded-2xl font-semibold flex items-center justify-center uppercase flex-col'>
                 <div >are you sure you want to delete this perticular test !</div>
                 <div className='text-red-600'>Test Id : {id} </div>
                 <div className='h-1/3 w-full flex flex-col p-5'>

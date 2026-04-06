@@ -59,9 +59,6 @@ const AnalyticsPage = () => {
     }
     getAllTest();
 
-
-
-
   }, [selectedSub])
 
 

@@ -6,6 +6,7 @@ import TestPage from './pages/TestPage'
 import AnalyticsPage from './pages/AnalyticsPage'
 import HistoryPage from './pages/HistoryPage'
 import useAuth from './utils/useAuth'
+import ReviewPage from './pages/ReviewPage'
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
       <Route path='/test' Component={TestPage}/>
       <Route path='/analytics' Component={AnalyticsPage}/>
       <Route path='/history' Component={HistoryPage}/>
+      <Route path='/review/:id' Component={ReviewPage}/>
     </Routes>
   )
 }

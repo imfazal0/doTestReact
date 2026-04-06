@@ -7,7 +7,7 @@ import LoginPage from './LoginPage';
 import { getAllTest, getSubject } from '../utils/FetchData'
 import UserInfo from '../context/userInfo'
 import dayjs from 'dayjs'
-import DeleteModal from './DeleteModal'
+import DeleteModal from '../components/history/DeleteModal'
 
 const HistoryPage = () => {
   const [allSubject , setAllSubject] = useState([]);

@@ -3,10 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate, useNavigation } from 'react-router-dom';
 
 const Header = ({ subject , selectedSub , setSelectedSub , loading }) => {
-   
-    useEffect(()=>{
-        
-    },[selectedSub])
+  
 
 
 const navigate = useNavigate()
@@ -32,7 +29,9 @@ const navigate = useNavigate()
                             Back To DashBoard
                         </div>
                     </div>
-                    <div className='md:text-xl text-lg  font-bold flex items-center justify-center bg-white text-purple-700 p-3 rounded-xl'>
+                    <div  className='md:text-xl text-lg  font-bold flex items-center justify-center bg-white text-purple-700 p-3 rounded-xl'
+                        onClick={()=>{window.location.reload()}}
+                    >
                         <RiRestartLine />
                         <div>
                             Refresh Data
@@ -47,9 +46,9 @@ const navigate = useNavigate()
                     !loading &&
                     subject.map((subject, index) => {
                         return (
-                            <div key={index} className={`min-w-40 md:h-full h-[5vh] rounded-xl text-sm flex items-center md:justify-center font-bold px-5 ${selectedSub === subject.sub ?' bg-white text-purple-800' : 'bg-transparent'}` } 
+                            <div key={index} className={`min-w-40 md:h-full h-[5vh] rounded-xl text-sm flex items-center md:justify-center font-bold px-5 ${selectedSub === subject.subject ?' bg-white text-purple-800' : 'bg-transparent'}` } 
 
-                                onClick={()=>{setSelectedSub(subject.sub)}}
+                                onClick={()=>{setSelectedSub(subject.subject)}}
                             >
                                 <img src={subject.icon} alt="Subject Image" className='h-1/2 aspect-square' />
                                 <p className='pr-5'>{subject.subject}</p>

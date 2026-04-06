@@ -5,6 +5,7 @@ import UserInfo from '../../context/userInfo'
 import { useNavigate } from 'react-router-dom'
 
 const PrevTestGrid = () => {
+    
     const uc = useContext(UserInfo);
     const [test , setTest] = useState(uc.user.totalTestData);
     const navigate = useNavigate();
@@ -25,8 +26,8 @@ const PrevTestGrid = () => {
 
         {
             test &&
-            test.map((test,idx)=>{
-                return idx<6 ? <TestCard test={test} key={crypto.randomUUID()} /> : ''
+            test.map((test)=>{
+                return <TestCard test={test} key={crypto.randomUUID()} /> 
             })
             
         }{
