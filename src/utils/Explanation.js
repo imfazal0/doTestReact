@@ -24,7 +24,6 @@ export async function explainQuestion({ question }) {
     });
 
     const data = await response.json();
-    console.log(data.choices[0].message.content);
 
     return data.choices[0].message.content;
 }

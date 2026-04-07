@@ -32,7 +32,7 @@ const ReviewPage = () => {
 
   return (
     <div className='w-screen h-screen px-[5%] py-[2%]'>
-      <ReviewHeader/>
+      <ReviewHeader data={data}/>
       <AllQuestionGrid test={test} />
     </div>
   )
