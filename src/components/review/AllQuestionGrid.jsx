@@ -1,15 +1,20 @@
-import React, { useContext, useEffect } from 'react'
-import { ReviewData } from '../../context/ReviewDataContext';
+import React from 'react'
+import ReviewQuestionCard from './ReviewQuestionCard'
+import { useLocation } from 'react-router-dom'
 
-const AllQuestionGrid = () => {
-    const rc = useContext(ReviewData);
-    useEffect(()=>{ 
-        console.log(rc);
-        },[rc.reviewData])
+const AllQuestionGrid = ({test}) => {
+  const data = useLocation();
+  
+  
 
   return (
-    <div className='text-black'>
-    </div>
+    <div className='w-full  flex flex-wrap justify-center'>
+          {
+            test.id.map((doc , idx)=>(
+              <ReviewQuestionCard data={test.questionData[idx]} id={test.id[idx]}  key={idx} userAnswer={data.state.userAnswers[idx]} />
+            ))
+          }
+    </div> 
   )
 }
 

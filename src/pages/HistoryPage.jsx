@@ -78,7 +78,6 @@ const HistoryPage = () => {
   },[date])
 
   useEffect(()=>{
-        console.log(score);
 
       setFilterData(
         allResults.filter(({data})=>{

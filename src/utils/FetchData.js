@@ -1,4 +1,4 @@
-import { collection, getDocs, query, where } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, query, where } from "firebase/firestore";
 import { db } from "../../firebaseConfig/config";
 import { useContext } from "react";
 import UserInfo from "../context/userInfo";
@@ -57,4 +57,13 @@ export const getAllTest = async (uid) => {
 
     }
 
+}
+
+export async function getTestById(subject,id) {
+        const docRef = doc(db , subject , id)
+        const document = await getDoc(docRef);
+        // console.log(document.data());
+        return(document.data())
+
+        
 }

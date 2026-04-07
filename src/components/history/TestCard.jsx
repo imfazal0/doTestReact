@@ -5,7 +5,6 @@ const TestCard = ({ data, setSelectedTest, id }) => {
 
   function handleDelete(e) {
     setSelectedTest(id)
-    console.log(id);
   }
 
 

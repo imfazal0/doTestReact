@@ -11,7 +11,7 @@ const NavTest = ({setShowSubject}) => {
       const selectedTest = tc.testData.filter((test)=>{
         return test.data().testName === e.target.id });
         tc.setTest(selectedTest);
-        tc.setTestResult(prev=>({...prev , testId:e.target.id}));
+        tc.setTestResult(prev=>({...prev , testId:(e.target.id).toLowerCase()}));
         tc.setStartExam(true);
         
   }
