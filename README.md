@@ -20,7 +20,7 @@ Features:
 4. Vite 
 ## Live URL
 use the following link to Access My website
-[Link](https://dotest-80528.web.app)
+[Link]([https://dotest-80528.web.app](https://imfazal0.github.io/doTestReact/))
 
 ## Screenshots
 ![App Screenshot](./public/pre01.png)
