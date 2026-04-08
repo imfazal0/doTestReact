@@ -36,7 +36,7 @@ const ReviewQuestionCard = ({ data, id , userAnswer }) => {
                     {
                         loading &&
                         <>
-                        <div className='flex items-center justify-center'><img src="/public/ai.gif" className=' h-15 aspect-square z-10 mix-blend-multiply' alt="" /><span className='font-bold uppercase text-sm animate-pulse '>Generating</span></div>
+                        <div className='flex items-center justify-center'><img src="/ai.gif" className=' h-15 aspect-square z-10 mix-blend-multiply' alt="" /><span className='font-bold uppercase text-sm animate-pulse '>Generating</span></div>
                         <div className='w-full bg-gray-400 h-5 rounded-2xl animate-pulse z-0'></div>
                         <div className='w-full bg-gray-400 h-5 rounded-2xl animate-pulse z-0'></div>
                         <div className='w-full bg-gray-400 h-5 rounded-2xl animate-pulse z-0'></div>

@@ -13,7 +13,7 @@ const ViewScoreComponent = () => {
   return (
     <div className='w-full h-full flex items-center flex-col text-center'>
             <div className=' w-[20vh] aspect-square bg-purple-400 rounded-2xl rotate-6 flex items-center justify-center '>
-                <img src="./public/document.gif" alt="submitted" className='w-[90%] rounded-2xl -rotate-6' />
+                <img src="/document.gif" alt="submitted" className='w-[90%] rounded-2xl -rotate-6' />
             </div>
             <div className='md:text-6xl font-bold  text-center text-purple-700 '>
                 Test Submitted SuccessFully!
@@ -24,7 +24,7 @@ const ViewScoreComponent = () => {
             </div>
             <div className='w-full md:h-[8vh] h-[25%] flex md:flex-row flex-col  gap-5 mt-10'>
                 <Link to={`/review/${tc.testResult.testId}`} state={tc.testResult} className='md:w-1/2 w-full h-1/2 bg-purple-700 hover:bg-purple-900 shadow-xl shadow-purple-400  rounded-2xl  text-white font-bold text-xl flex items-center justify-center '>
-                    <img src="./public/evolution.gif" alt="chart" className='h-[50%] aspect-square mix-blend-color-burn md:mr-1' />
+                    <img src="/evolution.gif" alt="chart" className='h-[50%] aspect-square mix-blend-color-burn md:mr-1' />
                     Get Complete Review
                 </Link>
                 <div className='md:w-1/2 w-full h-1/2 bg-gray-300 hover:bg-gray-400  shadow-xl shadow-gray-400 rounded-2xl  text-purple-700 font-bold text-xl flex items-center justify-center ' onClick={()=>{
