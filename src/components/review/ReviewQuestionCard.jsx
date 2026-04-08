@@ -22,7 +22,7 @@ const ReviewQuestionCard = ({ data, id , userAnswer }) => {
     }
 
     return (
-        <div className='w-[20vw] min-h-[50vh] bg-gray-200 rounded-2xl m-2 p-[1%] font-semibold border-t-4 border-purple-700 flex  flex-col gap-2 shadow-xl' >
+        <div className='md:w-[25vw] w-full md:min-h-[50vh]  bg-gray-200 rounded-2xl  md:p-[1%] p-[5%] font-semibold border-t-4 border-purple-700 flex  flex-col md:gap-2 gap-5 shadow-xl' >
             <div className='grid'>
                 <div className='flex h-10 gap-2' >
                     <div className='h-full aspect-square bg-purple-700 rounded-xl shadow-xl text-white uppercase flex items-center justify-center font-bold' >{id}</div>

@@ -59,9 +59,7 @@ const ButtonsNav = ({submitDone, qIdx , setQIdx, setCheckedOpt, checkedOpt, allK
 
     
     }},
-    submitTest: () => {
-
-    },
+   
 
 
   }

@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { formatText } from '../../utils/FormatText'
 import { RiArrowLeftLine, RiFileExcel2Line, RiFolderInfoLine } from '@remixicon/react'
 import dayjs from 'dayjs'
+import { getExcelData } from '../../utils/ToExcel'
 const LeaderBoard = ({ selectedTest, allResults,setShowSelSub , loading }) => {
     const [bestResults, setBestResults] = useState([]);
     const [allBestResults, setAllBestResults] = useState([]);
@@ -35,6 +36,17 @@ const LeaderBoard = ({ selectedTest, allResults,setShowSelSub , loading }) => {
         );
     };
 
+    const handlExport = ()=>{
+        // getExcelData();
+        let data =  bestResults.map((res , idx )=>{
+            const dataObj = res.data();
+            const dataArr = [idx+1 , dataObj.userName , dataObj.score , dataObj.timeSpent , dayjs.unix(dataObj.timestamp.seconds).format("DD MMM YYYY") , dataObj.subject , dataObj.testId]
+            return dataArr
+        })
+        data = [ ["rank" , "name" , "score" , "time spent" , "submit date" ,"subject" , "testName"] , ...data];
+        getExcelData(data);
+    }
+
     return (
         <div className='w-full min-h-full bg-gray-100 border mt-5 overflow-hidden rounded-2xl'>
             <div className='bg-blue-50 w-full h-1/5 font-bold uppercase p-[2%] text-black text-4xl border-b border-gray-300 '>
@@ -53,7 +65,7 @@ const LeaderBoard = ({ selectedTest, allResults,setShowSelSub , loading }) => {
                         <input onChange={handleSearch} type="text" placeholder='Search User' className='md:w-8/12 w-full bg-gray-200 h-7/12 border border-gray-400 outline-0  rounded-lg p-[2%] ' />
                     </div>
                     <div className='w-3/12 h-full flex justify-center items-center' >
-                        <button className='bg-purple-700 text-white w-full rounded-sm flex h-7/12 items-center justify-center font-bold'>
+                        <button onClick={handlExport} className='bg-purple-700 text-white w-full rounded-sm flex h-7/12 items-center justify-center font-bold'>
                             <RiFileExcel2Line />
                             Export Data
                         </button>
@@ -62,18 +74,22 @@ const LeaderBoard = ({ selectedTest, allResults,setShowSelSub , loading }) => {
             </div>
             <div className='w-full '>
                 <table className='w-full h-full table-fixed md:text-xl text-sm'>
-                    <tr className='md:h-[10vh] h-[5vh] border-b  border-gray-300'>
+                    
+                  <thead>
+                      <tr className='md:h-[10vh] h-[5vh] border-b  border-gray-300'>
                         <th className=' w-1/20'>Rank</th>
                         <th className=' w-[15%]'>Name Of Candidate</th>
                         <th className=' w-1/20'>Score</th>
                         <th className=' w-1/20'>Time</th>
                         <th className=' w-1/20'>Date</th>
                     </tr>
+                  </thead>
 
                     {
                         !loading && 
                         bestResults.map((res, idx) => (
-                            <tr className='h-[5vh] border-b  border-gray-300 md:text-lg font-semibold text-sm'>
+                           <tbody key={idx}>
+                             <tr className='h-[5vh] border-b  border-gray-300 md:text-lg font-semibold text-sm'>
                                 <th className=' w-1/20 '>
                                 <div className='w-full flex justify-center items-center flex-col'>
                                     {idx===0 && <img src='./public/medal_01.gif' className='h-10 mix-blend-multiply '/>}
@@ -87,6 +103,7 @@ const LeaderBoard = ({ selectedTest, allResults,setShowSelSub , loading }) => {
                                 <th className=' w-1/20'>{dayjs.unix(res.data().timestamp.seconds).format("DD MMM YYYY")}</th>
                             </tr>
 
+                           </tbody>
                         ))
 
 

@@ -8,7 +8,7 @@ const AllQuestionGrid = ({test}) => {
   
 
   return (
-    <div className='w-full  flex flex-wrap justify-center'>
+    <div className='w-full  flex md:flex-wrap flex-col md:flex-row justify-center gap-10'>
           {
             test.id.map((doc , idx)=>(
               <ReviewQuestionCard data={test.questionData[idx]} id={test.id[idx]}  key={idx} userAnswer={data.state.userAnswers[idx]} />

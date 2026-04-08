@@ -8,6 +8,7 @@ import { getAllTest, getSubject } from '../utils/FetchData'
 import UserInfo from '../context/userInfo'
 import dayjs from 'dayjs'
 import DeleteModal from '../components/history/DeleteModal'
+import { getExcelData } from '../utils/ToExcel'
 
 const HistoryPage = () => {
   const [allSubject , setAllSubject] = useState([]);
@@ -97,6 +98,7 @@ const HistoryPage = () => {
   },[selectedTest])
 
 
+
 function  clearFilter() {
     setSelectedSub('all_Subject');
     setDate(0);
@@ -104,6 +106,20 @@ function  clearFilter() {
     setTest('')
 
 }
+
+ const handlExport = ()=>{
+        // getExcelData();
+        console.log(allResults);
+        
+        let data =  allResults.map((res , idx )=>{
+            const dataObj = res.data;
+            const dataArr = [idx+1 , dataObj.userName , dataObj.score , dataObj.timeSpent /60 , dayjs.unix(dataObj.timestamp.seconds).format("DD MMM YYYY") , dataObj.subject , dataObj.testId]
+            return dataArr
+        })
+        data = [ ["rank" , "name" , "score" , "time spent" , "submit date" ,"subject" , "testName"] , ...data];
+        getExcelData(data );
+    }
+
 
 
   const user = useAuth();  
@@ -116,7 +132,7 @@ function  clearFilter() {
     }
 
     <div className='w-screen h-screen px-[5%] py-[1%] flex flex-col gap-5'>
-        <Header/>
+        <Header handlExport={handlExport} />
         <Filters subject={allSubject}   setSelectedSub={setSelectedSub}  setTest={setTest} setDate={setDate} clearFilter={clearFilter} setScore={setScore} />
         {
           !loading &&

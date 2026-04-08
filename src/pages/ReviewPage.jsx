@@ -31,7 +31,7 @@ const ReviewPage = () => {
  
 
   return (
-    <div className='w-screen h-screen px-[5%] py-[2%]'>
+    <div className='w-screen h-screen px-[5%] py-[2%] flex flex-col gap-5'>
       <ReviewHeader data={data}/>
       <AllQuestionGrid test={test} />
     </div>
