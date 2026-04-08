@@ -1,12 +1,13 @@
 import React, { useContext, useEffect } from 'react'
 import testData from '../../../context/testData'
 import { RiHome5Line } from '@remixicon/react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const ViewScoreComponent = () => {
     const tc = useContext(testData);
     useEffect(()=>{
-        
+            console.log(tc.testResult);
+            
     })
     const navigate = useNavigate();
   return (
@@ -22,10 +23,10 @@ const ViewScoreComponent = () => {
                 <div className='w-1/2  h-full bg-emerald-200 rounded-2xl  flex items-center justify-center font-bold text-green-900 text-center'>{tc.testResult.correctAnswers}/{tc.testResult.totalQuestions}<br/> Score</div>                
             </div>
             <div className='w-full md:h-[8vh] h-[25%] flex md:flex-row flex-col  gap-5 mt-10'>
-                <div className='md:w-1/2 w-full h-1/2 bg-purple-700 hover:bg-purple-900 shadow-xl shadow-purple-400  rounded-2xl  text-white font-bold text-xl flex items-center justify-center ' onClick={()=>{navigate('/review')}}>
+                <Link to={`/review/${tc.testResult.testId}`} state={tc.testResult} className='md:w-1/2 w-full h-1/2 bg-purple-700 hover:bg-purple-900 shadow-xl shadow-purple-400  rounded-2xl  text-white font-bold text-xl flex items-center justify-center '>
                     <img src="./public/evolution.gif" alt="chart" className='h-[50%] aspect-square mix-blend-color-burn md:mr-1' />
                     Get Complete Review
-                </div>
+                </Link>
                 <div className='md:w-1/2 w-full h-1/2 bg-gray-300 hover:bg-gray-400  shadow-xl shadow-gray-400 rounded-2xl  text-purple-700 font-bold text-xl flex items-center justify-center ' onClick={()=>{
                     navigate('/')
                 }}>

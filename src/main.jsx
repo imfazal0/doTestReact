@@ -8,7 +8,7 @@ import UserInfoContext from './context/userInfoContext.jsx'
 
 
 createRoot(document.getElementById('root')).render(
-  <BrowserRouter>
+  <BrowserRouter  basename="/doTestReact/">
   <StrictMode>
     <UserInfoContext>
       <App />

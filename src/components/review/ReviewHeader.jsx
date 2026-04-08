@@ -4,7 +4,6 @@ import ScoreCard from './ScoreCard';
 import { Link } from 'react-router-dom';
 
 const ReviewHeader = ({ data }) => {
-    console.log(data.state);
 
 
 

@@ -62,7 +62,6 @@ export const getAllTest = async (uid) => {
 export async function getTestById(subject,id) {
         const docRef = doc(db , subject , id)
         const document = await getDoc(docRef);
-        // console.log(document.data());
         return(document.data())
 
         

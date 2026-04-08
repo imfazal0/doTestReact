@@ -12,12 +12,12 @@ const ReviewPage = () => {
     id: [],
   });
 
+  
   useEffect(() => {
     if (!data.state ) {
         navigate('/')
     } else {
       getTestById(data.state.subject, data.state.testId).then((result) => {
-        console.log(result);
         
         return setTest({
           questionData: Object.values(JSON.parse(result.exam)),

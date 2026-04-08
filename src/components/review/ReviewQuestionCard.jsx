@@ -17,7 +17,6 @@ const ReviewQuestionCard = ({ data, id , userAnswer }) => {
 
             })
         }catch(err){
-                console.log(err);       
         }}
     }
 

@@ -109,7 +109,6 @@ function  clearFilter() {
 
  const handlExport = ()=>{
         // getExcelData();
-        console.log(allResults);
         
         let data =  allResults.map((res , idx )=>{
             const dataObj = res.data;

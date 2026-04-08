@@ -3,26 +3,18 @@ import React, { useEffect, useState } from 'react'
 import { db } from '../../../../firebaseConfig/config'
 import { collection, getDocs } from 'firebase/firestore'
 import { formatText } from '../../../utils/FormatText'
+import { getSubject } from '../../../utils/FetchData'
 const NavSubject = ({setSubject , subject , selSub}) => {
   const [error , setError] = useState(null);
   const [loading , setLoading] = useState(true);
   
 
-    useEffect(()=>{
-         async function getSubject(db) {
-          try{
-            const subjectRef = collection(db, 'All_Subjects');
-            const subjectSnapshot = await getDocs(subjectRef);
-            setSubject(subjectSnapshot.docs);
-            
-          } catch (err){
-              setError(err);
-          }finally{
-            setLoading(false)
-          }
-            }
-        
-            return () => getSubject(db);
+    useEffect( ()=>{
+        getSubject().then(async (res)=>{
+          console.log(res);
+          await setSubject(res.subject)
+          setLoading(res.loading);
+        })
     },[])
 
     
@@ -36,9 +28,9 @@ const NavSubject = ({setSubject , subject , selSub}) => {
           subject.map((sub,idx) => (
             <div  className='relative hover:bg-gray-200  hover:border-l-5 border-purple-700  w-full h-[10%] bg-gray-300 mt-[3%]  rounded-2xl flex p-[2%] items-center gap-x-2 border ' key={idx} >
               <div className='absolute z-100 w-full h-full top-0 left-0 rounded-2xl ' 
-                onClick={selSub} id={sub.data().subject}  ></div>
-              <img src={sub.data().icon} alt="" className='h-full aspect-square'/>
-              <p className='flex font-bold text-sm'>{formatText(sub.data().subject)}</p>
+                onClick={selSub} id={sub.subject}  ></div>
+              <img src={sub.icon} alt="" className='h-full aspect-square'/>
+              <p className='flex font-bold text-sm'>{formatText(sub.subject)}</p>
             </div>
           ))
         }

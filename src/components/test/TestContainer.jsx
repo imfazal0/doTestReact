@@ -78,7 +78,6 @@ const TestContainer = () => {
   }
 
 useEffect(()=>{
-  console.log(tc.testResult);
   
 },[tc.testResult])
 
