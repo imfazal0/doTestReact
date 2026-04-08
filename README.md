@@ -18,6 +18,10 @@ Features:
 2. React Context API For State Management
 3. Tailwind CSS
 4. Vite 
+## Live URL
+use the following link to Access My website
+[Link](https://imfazal0.github.io/doTestReact/)
+
 ## Screenshots
 ![App Screenshot](./public/pre01.png)
 ![App Screenshot](./public/pre02.png)
